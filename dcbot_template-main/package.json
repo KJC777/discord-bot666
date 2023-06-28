@@ -1,0 +1,30 @@
+{
+    "name": "discord-bot-template",
+    "version": "1.0.0",
+    "description": "A template for discord bot",
+    "author": "NTNU CSIE CAMP (https://github.com/CSIE-Camp)",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js",
+        "format": "prettier --ignore-path .gitignore --write ."
+    },
+    "dependencies": {
+        "cloudflared": "^0.3.5",
+        "discord.js": "^14.9.0",
+        "dotenv": "^16.0.3",
+        "express": "^4.18.2",
+        "openai": "^3.3.0"
+    },
+    "devDependencies": {
+        "@types/express": "^4.17.17",
+        "prettier": "^2.8.7"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/CSIE-Camp/discord-bot-template.git"
+    },
+    "bugs": {
+        "url": "https://github.com/CSIE-Camp/discord-bot-template/issues"
+    },
+    "homepage": "https://github.com/CSIE-Camp/discord-bot-template#readme"
+}

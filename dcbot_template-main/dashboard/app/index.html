@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>•͈ᴗ•͈ 我的機器人 ᵕ͈ᴗᵕ͈</title>
+        <link rel="stylesheet" href="/base.css" />
+        <script defer src="/base.js"></script>
+    </head>
+    <body>
+        <main>
+            <h1>•͈ᴗ•͈ 我的機器人 ᵕ͈ᴗᵕ͈</h1>
+
+            <hr />
+
+            <p>機器人狀態</p>
+
+            <div>{bot.bot.username}: {bot.status}</div>
+
+            <hr />
+
+            <p>即時訊息</p>
+            <div class="messages">
+                <div>
+                    <img src="{msg.author.avatar}" style="width: 2rem; height: 2rem" />
+                    {msg.guild} > {msg.channel} | {msg.author.name}: {msg.content}
+                </div>
+            </div>
+        </main>
+    </body>
+</html>
