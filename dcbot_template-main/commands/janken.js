@@ -121,14 +121,14 @@ module.exports = {
                 players.push({ id: interaction.user.id, money: 500 });
                 const resultEmbed = new EmbedBuilder()
                 .setColor("#DDDDDD")
-                .setTitle(`沒有資料`)
+                .setTitle(str)
                 .setDescription(`結果：${earnings}元\n你現在有 ${500+earnings} 元!`);
                 collected.update({embeds: [resultEmbed], components: []});
             }
 
             //stringify players 並存回 players.json
             const json = JSON.stringify(players);
-            fs.writeFileSync("player.json", json);
+            fs.writeFileSync("players.json", json);
             //關閉 collector
             collector.stop();
 
