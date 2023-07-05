@@ -1,8 +1,7 @@
 # discord-bot666
 FOR 六角龍
 
-記得先進入 dcbot_template-main
-`cd dcbot_template-main`
+記得先
 
 `npm i`
 
