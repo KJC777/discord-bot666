@@ -11,6 +11,6 @@ FOR 六角龍
 `npm i openai`
 
 
-`node index.js`
+`npm start`
 
 ### env
