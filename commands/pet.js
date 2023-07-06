@@ -71,6 +71,11 @@ module.exports = {
                     // .setURL('')
                     .setLabel('👥狀態--stat');
 
+                const shineButton = new ButtonBuilder()
+                    .setStyle(ButtonStyle.Primary)
+                    .setCustomId('shine')
+                    // .setURL('')
+                    .setLabel('🌟照神聖的光--\"Let there be light\"');
                 const restButton = new ButtonBuilder()
                     .setStyle(ButtonStyle.Primary)
                     .setCustomId('rest')
