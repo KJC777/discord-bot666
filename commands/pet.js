@@ -129,6 +129,7 @@ module.exports = {
                         collected.update({ embeds: [shop], components: [ShopRow] });
                         const collector = interaction.channel.createMessageComponentCollector({ time: 10000 });
                         let money_now = await PlayerData(PlayerId, "money");
+                        let foods_now = await PlayerData(PlayerId, "foods");
                         collector.on('collect', collected => {
                             const customId = collected.customId;
                             //
@@ -140,6 +141,14 @@ module.exports = {
                                                 console.error(`Failed to update ${PlayerId}`);
                                             }
                                         });
+
+                                    UpdatePlayer(PlayerId, "foods", foods_now + 1)
+                                        .then((Success) => {
+                                            if (!Success) {
+                                                console.error(`Failed to update ${PlayerId}`);
+                                            }
+                                        });
+
                                     const embed = new EmbedBuilder()
                                         .setTitle('購買成功!')
                                         .setColor("Random")
@@ -159,6 +168,14 @@ module.exports = {
                                                 console.error(`Failed to update ${PlayerId}`);
                                             }
                                         });
+
+                                    UpdatePlayer(PlayerId, "foods", foods_now + 2)
+                                        .then((Success) => {
+                                            if (!Success) {
+                                                console.error(`Failed to update ${PlayerId}`);
+                                            }
+                                        });
+
                                     const embed = new EmbedBuilder()
                                         .setTitle('購買成功!')
                                         .setColor("Random")
@@ -178,6 +195,14 @@ module.exports = {
                                                 console.error(`Failed to update ${PlayerId}`);
                                             }
                                         });
+
+                                    UpdatePlayer(PlayerId, "foods", foods_now + 3)
+                                        .then((Success) => {
+                                            if (!Success) {
+                                                console.error(`Failed to update ${PlayerId}`);
+                                            }
+                                        });
+
                                     const embed = new EmbedBuilder()
                                         .setTitle('購買成功!')
                                         .setColor("Random")
