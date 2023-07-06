@@ -152,7 +152,7 @@ module.exports = {
                     .setStyle(ButtonStyle.Primary)
                     .setCustomId('rest')
                     // .setURL('')
-                    .setLabel('💤休息--rest');
+                    .setLabel('🌟照神聖的光--\"Let there be light\"');
 
                 const exerciseButton = new ButtonBuilder()
                     .setStyle(ButtonStyle.Primary)
