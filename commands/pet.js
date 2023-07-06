@@ -33,24 +33,24 @@ module.exports = {
                 } else {
                     //...  
                 }
-                //建立 embed 和剪刀石頭布的三個 button
-                const defaultEmbed = new EmbedBuilder()
-                    .setColor("#ffffff")
-                    .setTitle(`主選單--Pet menu`)
+
+                // const defaultEmbed = new EmbedBuilder()
+                //     .setColor("#ffffff")
+                //     .setTitle(`主選單--Pet menu`)
 
                 const eggEmbed = new EmbedBuilder()
                     .setColor("#ffffff")
-                    .setTitle(`主選單--Pet menu`)
+                    .setTitle("蛋主選單\-\-Pet menu")
                     .setImage("https://i.imgur.com/71ELEmK.gif")
                     
                 const youngEmbed = new EmbedBuilder()
                     .setColor("#ffffff")
-                    .setTitle(`主選單--Pet menu`)
+                    .setTitle("幼年主選單\-\-Pet menu")
                     .setImage("https://i.imgur.com/NrFzY1p.gif")
                 
                 const oldEmbed = new EmbedBuilder()
                     .setColor("#ffffff")
-                    .setTitle(`主選單--Pet menu`)
+                    .setTitle("成年主選單\-\-Pet menu")
                     .setImage("https://i.imgur.com/0RfaFwU.gif")
                 // .setDescription(`結果：${earnings}元\n你現在有 ${players[i].money} 元!`);
                 // interaction.reply({ embeds: [diceEmbed] });
@@ -143,11 +143,11 @@ module.exports = {
                     }
                 } else {
                     if (age_now < 3) {
-                        interaction.reply({ embeds: [FirstEmbed], components: [buttonRowEGG]});
+                        interaction.reply({ embeds: [eggEmbed], components: [buttonRowEGG]});
                     } else if (age_now < 6) {
-                        interaction.reply({ embeds: [FirstEmbed], components: [buttonRowYOUNG] });
+                        interaction.reply({ embeds: [youngEmbed], components: [buttonRowYOUNG] });
                     } else {
-                        interaction.reply({ embeds: [FirstEmbed], components: [buttonRowOLD1, buttonRowOLD2] });
+                        interaction.reply({ embeds: [oldEmbed], components: [buttonRowOLD1, buttonRowOLD2] });
                     }
                 }
                 //建立 collector
