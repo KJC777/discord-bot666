@@ -91,7 +91,16 @@ module.exports = {
                     const customId = collected.customId;
                     //利用玩家所按按鈕的 customId 來判斷玩家的選擇
                     if (customId == "stat") {
-
+                        // console.log(money_now);
+                        const embed = new EmbedBuilder()
+                            .setTitle('Status: ')
+                            .setColor("Random")
+                            .addFields(
+                                { name: 'Money', value: (await PlayerData(PlayerId, "money")).toString(), inline: true },
+                                { name: 'Hungry', value: (await PlayerData(PlayerId, "pet_hungry")).toString(), inline: true },
+                                { name: 'Age', value: (await PlayerData(PlayerId, "age")).toString(), inline: true },
+                                { name: 'Foods', value: (await PlayerData(PlayerId, "foods")).toString(), inline: true });
+                        interaction.followUp({ embeds: [embed] });
                     }
                     else if (customId == "store") {
                         const embed = new EmbedBuilder()
@@ -121,41 +130,41 @@ module.exports = {
                             .addFields({ name: 'KK', value: '只是個示範', inline: true });
                         interaction.followUp({ embeds: [embed] });
                     }
-                    else if (customId == "feed") {
+                    else if (customId == "feedx") {
                         const embed = new EmbedBuilder()
                             .setTitle('還沒有東西喔...沒食物')
                             .setColor("Random")
                             .addFields({ name: 'QQ', value: '只是個示範', inline: true });
                         interaction.followUp({ embeds: [embed] });
                     }
-                    // else if (customId == "...") {
-                    //     let foods_now = await PlayerData(PlayerId, "pet_hungry");
-                    //     let hungry_now = await PlayerData(PlayerId, "pet_hungry");
+                    else if (customId == "feed") {
+                        let foods_now = await PlayerData(PlayerId, "pet_foods");
+                        let hungry_now = await PlayerData(PlayerId, "pet_hungry");
 
-                    //     foods_now -= 1;
-                    //     hungry_now += 1;
+                        foods_now -= 1;
+                        hungry_now += 1;
 
 
-                    //     UpdatePlayer(PlayerId, "foods", foods_now)
-                    //         .then((Success) => {
-                    //             if (!Success) {
-                    //                 console.error(`Failed to update ${PlayerId}`);
-                    //             }
-                    //         });
+                        UpdatePlayer(PlayerId, "foods", foods_now)
+                            .then((Success) => {
+                                if (!Success) {
+                                    console.error(`Failed to update ${PlayerId}`);
+                                }
+                            });
 
-                    //     UpdatePlayer(PlayerId, "pet_hungry", hungry_now)
-                    //         .then((Success) => {
-                    //             if (!Success) {
-                    //                 console.error(`Failed to update ${PlayerId}`);
-                    //             }
-                    //         });
+                        UpdatePlayer(PlayerId, "pet_hungry", hungry_now)
+                            .then((Success) => {
+                                if (!Success) {
+                                    console.error(`Failed to update ${PlayerId}`);
+                                }
+                            });
 
-                    //     const embed = new EmbedBuilder()
-                    //         .setTitle(`Feed`)
-                    //         .setColor("Random")
-                    //         .addFields({ name: 'hungry', value: "...", inline: true });
-                    //     interaction.followUp({ embeds: [embed] });
-                    // }
+                        const embed = new EmbedBuilder()
+                            .setTitle(`Feed`)
+                            .setColor("Random")
+                            .addFields({ name: 'hungry', value: "...", inline: true });
+                        interaction.followUp({ embeds: [embed] });
+                    }
 
                     // //讀取 players.json 並 parse 成 players
                     // const data = fs.readFileSync("players.json");
