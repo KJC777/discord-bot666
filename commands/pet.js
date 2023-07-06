@@ -125,14 +125,28 @@ module.exports = {
                 const buttonRowOLD1 = new ActionRowBuilder().addComponents(statButton, storeButton, feedButton);
                 const buttonRowOLD2 = new ActionRowBuilder().addComponents(exerciseButton, codeButton, feedButton);
 
-                // let age = 
-
                 //回覆
-                // if(First == true) {
-                //     interaction.reply({ embeds: [FirstEmbed], components: [buttonRow, buttonRow2] });
-                // } else {
-                //     interaction.reply({ embeds: [buttonEmbed], components: [buttonRow, buttonRow2] });
-                // }
+                let age_now = parseInt(PlayerData(PlayerId, "age"));
+                if (First == true) {
+                    //
+                    // add GIF
+                    //
+                    if (age_now < 3) {
+                        interaction.reply({ embeds: [FirstEmbed], components: [buttonRowEGG]});
+                    } else if (age_now < 6) {
+                        interaction.reply({ embeds: [FirstEmbed], components: [buttonRowYOUNG] });
+                    } else {
+                        interaction.reply({ embeds: [FirstEmbed], components: [buttonRowOLD1, buttonRowOLD2] });
+                    }
+                } else {
+                    if (age_now < 3) {
+                        interaction.reply({ embeds: [FirstEmbed], components: [buttonRowEGG]});
+                    } else if (age_now < 6) {
+                        interaction.reply({ embeds: [FirstEmbed], components: [buttonRowYOUNG] });
+                    } else {
+                        interaction.reply({ embeds: [FirstEmbed], components: [buttonRowOLD1, buttonRowOLD2] });
+                    }
+                }
                 //建立 collector
                 const collector = interaction.channel.createMessageComponentCollector({ time: 15000 });
 
@@ -225,30 +239,45 @@ module.exports = {
                     else if (customId == "feed") {
                         let foods_now = await PlayerData(PlayerId, "pet_foods");
                         let hungry_now = await PlayerData(PlayerId, "pet_hungry");
+                        let age_now = await PlayerData(PlayerId, "age");
 
-                        foods_now -= 1;
-                        hungry_now += 1;
+                        if (foods_now < 1) {
+                            const embed = new EmbedBuilder()
+                                .setTitle(`沒有食物了...`)
+                                .setColor("Random")
+                            interaction.followUp({ embeds: [embed] });
+                        } else {
+                            foods_now -= 1;
+                            hungry_now += 1;
+                            age += 1;
 
+                            UpdatePlayer(PlayerId, "foods", foods_now)
+                                .then((Success) => {
+                                    if (!Success) {
+                                        console.error(`Failed to update ${PlayerId}`);
+                                    }
+                                });
 
-                        UpdatePlayer(PlayerId, "foods", foods_now)
-                            .then((Success) => {
-                                if (!Success) {
-                                    console.error(`Failed to update ${PlayerId}`);
-                                }
-                            });
+                            UpdatePlayer(PlayerId, "pet_hungry", hungry_now)
+                                .then((Success) => {
+                                    if (!Success) {
+                                        console.error(`Failed to update ${PlayerId}`);
+                                    }
+                                });
 
-                        UpdatePlayer(PlayerId, "pet_hungry", hungry_now)
-                            .then((Success) => {
-                                if (!Success) {
-                                    console.error(`Failed to update ${PlayerId}`);
-                                }
-                            });
+                            UpdatePlayer(PlayerId, "age", age_now)
+                                .then((Success) => {
+                                    if (!Success) {
+                                        console.error(`Failed to update ${PlayerId}`);
+                                    }
+                                });
 
-                        const embed = new EmbedBuilder()
-                            .setTitle(`Feed`)
-                            .setColor("Random")
-                            .addFields({ name: 'hungry', value: "...", inline: true });
-                        interaction.followUp({ embeds: [embed] });
+                            const embed = new EmbedBuilder()
+                                .setTitle(`Feed: `)
+                                .setColor("Random")
+                                .addFields({ name: 'hungry', value: (await PlayerData(PlayerId, "pet_hungry")).toString(), inline: true });
+                            interaction.followUp({ embeds: [embed] });
+                        }
                     }
 
                     // //讀取 players.json 並 parse 成 players
