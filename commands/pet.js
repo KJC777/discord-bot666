@@ -37,15 +37,15 @@ module.exports = {
                 const defaultEmbed = new EmbedBuilder()
                     .setColor("#ffffff")
                     .setTitle(`主選單--Pet menu`)
-                
+
                 const eggEmbed = new EmbedBuilder()
                     .setColor("#ffffff")
                     .setTitle(`主選單--Pet menu`)
-                    
+
                 const youngEmbed = new EmbedBuilder()
                     .setColor("#ffffff")
                     .setTitle(`主選單--Pet menu`)
-                
+
                 const oldEmbed = new EmbedBuilder()
                     .setColor("#ffffff")
                     .setTitle(`主選單--Pet menu`)
@@ -128,11 +128,11 @@ module.exports = {
                 // let age = 
 
                 //回覆
-                if(First == true) {
-                    interaction.reply({ embeds: [FirstEmbed], components: [buttonRow, buttonRow2] });
-                } else {
-                    interaction.reply({ embeds: [buttonEmbed], components: [buttonRow, buttonRow2] });
-                }
+                // if(First == true) {
+                //     interaction.reply({ embeds: [FirstEmbed], components: [buttonRow, buttonRow2] });
+                // } else {
+                //     interaction.reply({ embeds: [buttonEmbed], components: [buttonRow, buttonRow2] });
+                // }
                 //建立 collector
                 const collector = interaction.channel.createMessageComponentCollector({ time: 15000 });
 
@@ -220,13 +220,6 @@ module.exports = {
                             .setTitle('還沒有東西喔...沒辦法')
                             .setColor("Random")
                             .addFields({ name: 'KK', value: '只是個示範', inline: true });
-                        collected.update({ embeds: [embed] });
-                    }
-                    else if (customId == "feedx") {
-                        const embed = new EmbedBuilder()
-                            .setTitle('還沒有東西喔...沒食物')
-                            .setColor("Random")
-                            .addFields({ name: 'QQ', value: '只是個示範', inline: true });
                         collected.update({ embeds: [embed] });
                     }
                     else if (customId == "feed") {
