@@ -129,27 +129,48 @@ module.exports = {
                 const buttonRowOLD2 = new ActionRowBuilder().addComponents(exerciseButton, codeButton, feedButton);
 
                 //回覆
-                let age_now = parseInt(PlayerData(PlayerId, "age"));
-                if (First == true) {
-                    //
-                    // add GIF
-                    //
-                    if (age_now < 3) {
-                        interaction.reply({ embeds: [FirstEmbed], components: [buttonRowEGG]});
-                    } else if (age_now < 6) {
-                        interaction.reply({ embeds: [FirstEmbed], components: [buttonRowYOUNG] });
+                PlayerData(PlayerId, "age")
+                .then(age =>{
+                    let age_now = parseInt(age);
+                    if (First == true) {
+                        if (age_now < 3) {
+                            interaction.reply({ embeds: [FirstEmbed], components: [buttonRowEGG]});
+                        } else if (age_now < 6) {
+                            interaction.reply({ embeds: [FirstEmbed], components: [buttonRowYOUNG] });
+                        } else {
+                            interaction.reply({ embeds: [FirstEmbed], components: [buttonRowOLD1, buttonRowOLD2] });
+                        } 
                     } else {
-                        interaction.reply({ embeds: [FirstEmbed], components: [buttonRowOLD1, buttonRowOLD2] });
+                        if (age_now < 3) {
+                            interaction.reply({ embeds: [eggEmbed], components: [buttonRowEGG]});
+                        } else if (age_now < 6) {
+                            interaction.reply({ embeds: [youngEmbed], components: [buttonRowYOUNG] });
+                        } else {
+                            interaction.reply({ embeds: [oldEmbed], components: [buttonRowOLD1, buttonRowOLD2] });
+                        }
                     }
-                } else {
-                    if (age_now < 3) {
-                        interaction.reply({ embeds: [eggEmbed], components: [buttonRowEGG]});
-                    } else if (age_now < 6) {
-                        interaction.reply({ embeds: [youngEmbed], components: [buttonRowYOUNG] });
-                    } else {
-                        interaction.reply({ embeds: [oldEmbed], components: [buttonRowOLD1, buttonRowOLD2] });
-                    }
-                }
+                })
+                // let age_now = parseInt(PlayerData(PlayerId, "age"));
+                // if (First == true) {
+                //     //
+                //     // add GIF
+                //     //
+                //     if (age_now < 3) {
+                //         interaction.reply({ embeds: [FirstEmbed], components: [buttonRowEGG]});
+                //     } else if (age_now < 6) {
+                //         interaction.reply({ embeds: [FirstEmbed], components: [buttonRowYOUNG] });
+                //     } else {
+                //         interaction.reply({ embeds: [FirstEmbed], components: [buttonRowOLD1, buttonRowOLD2] });
+                //     }
+                // } else {
+                //     if (age_now < 3) {
+                //         interaction.reply({ embeds: [eggEmbed], components: [buttonRowEGG]});
+                //     } else if (age_now < 6) {
+                //         interaction.reply({ embeds: [youngEmbed], components: [buttonRowYOUNG] });
+                //     } else {
+                //         interaction.reply({ embeds: [oldEmbed], components: [buttonRowOLD1, buttonRowOLD2] });
+                //     }
+                // }
                 //建立 collector
                 const collector = interaction.channel.createMessageComponentCollector({ time: 15000 });
 
