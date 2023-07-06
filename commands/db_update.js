@@ -47,6 +47,6 @@ module.exports = {
                                 }
                             });
 
-        await interaction.reply((PlayerData(id, type).toString()));
+        interaction.reply(type + ": " + (await PlayerData(id, type)).toString());
     },
 };
