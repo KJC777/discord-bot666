@@ -21,6 +21,7 @@ module.exports = {
 
         SearchPlayer(PlayerId)
             .then((Result) => {
+                let age = PlayerData(PlayerId, "age");
                 if (Result.length == 0) {
                     First = true;
                     AddPlayer(PlayerId, start_money, start_pet_hungry, start_pet_fatigue, start_age, start_foods)
@@ -33,7 +34,19 @@ module.exports = {
                     //...  
                 }
                 //建立 embed 和剪刀石頭布的三個 button
-                const buttonEmbed = new EmbedBuilder()
+                const defaultEmbed = new EmbedBuilder()
+                    .setColor("#ffffff")
+                    .setTitle(`主選單--Pet menu`)
+                
+                const eggEmbed = new EmbedBuilder()
+                    .setColor("#ffffff")
+                    .setTitle(`主選單--Pet menu`)
+                    
+                const youngEmbed = new EmbedBuilder()
+                    .setColor("#ffffff")
+                    .setTitle(`主選單--Pet menu`)
+                
+                const oldEmbed = new EmbedBuilder()
                     .setColor("#ffffff")
                     .setTitle(`主選單--Pet menu`)
                 // .setDescription(`結果：${earnings}元\n你現在有 ${players[i].money} 元!`);
@@ -41,8 +54,8 @@ module.exports = {
 
                 const FirstEmbed = new EmbedBuilder()
                     .setColor("#ffffff")
-                    .setTitle(`全新寵物`)
-                    .setImage("https://i.imgur.com/F3fYNU2.gif");                
+                    .setTitle(`全新寵物(把他養大以解鎖各種功能)`)
+                    .setImage("https://i.imgur.com/B7FbeSb.png");
 
                 const shop = new EmbedBuilder()
                     .setTitle('這裡是商店 !\nTHE SHOP !')
@@ -82,6 +95,11 @@ module.exports = {
                     .setCustomId('rest')
                     // .setURL('')
                     .setLabel('💤休息--rest');
+                const shineButton = new ButtonBuilder()
+                    .setStyle(ButtonStyle.Primary)
+                    .setCustomId('shine')
+                    // .setURL('')
+                    .setLabel('🌟照射神秘光線--\"Let there be light\"');
 
                 const exerciseButton = new ButtonBuilder()
                     .setStyle(ButtonStyle.Primary)
@@ -102,8 +120,10 @@ module.exports = {
                     .setLabel('🍞餵食--feed');
 
                 //將三個 button 都放入 row 中並回覆 embed 和 row
-                const buttonRow = new ActionRowBuilder().addComponents(storeButton, statButton, restButton);
-                const buttonRow2 = new ActionRowBuilder().addComponents(exerciseButton, codeButton, feedButton);
+                const buttonRowEGG = new ActionRowBuilder().addComponents(statButton, storeButton, shineButton);
+                const buttonRowYOUNG = new ActionRowBuilder().addComponents(statButton, storeButton, feedButton, exerciseButton);
+                const buttonRowOLD1 = new ActionRowBuilder().addComponents(statButton, storeButton, feedButton);
+                const buttonRowOLD2 = new ActionRowBuilder().addComponents(exerciseButton, codeButton, feedButton);
 
                 // let age = 
 
@@ -145,94 +165,43 @@ module.exports = {
                         collector.on('collect', collected => {
                             const customId = collected.customId;
                             //
-                            if (customId == "storeItem1") {
-                                if (money_now >= 100) {
-                                    UpdatePlayer(PlayerId, "money", money_now - 100)
-                                        .then((Success) => {
-                                            if (!Success) {
-                                                console.error(`Failed to update ${PlayerId}`);
-                                            }
-                                        });
+                            let store_items = ["storeItem1", "storeItem2", "storeItem3"];
+                            for (let i = 0; i < 3; i++) {
+                                if (customId == store_items[i]) {
+                                    if (parseInt(money_now) >= 100 * (1 + i)) {
+                                        is_money_enough = true;
+                                        UpdatePlayer(PlayerId, "money", (money_now - 100).toString())
+                                            .then((Success) => {
+                                                if (!Success) {
+                                                    console.error(`Failed to update ${PlayerId}`);
+                                                }
+                                            });
 
-                                    UpdatePlayer(PlayerId, "foods", foods_now + 1)
-                                        .then((Success) => {
-                                            if (!Success) {
-                                                console.error(`Failed to update ${PlayerId}`);
-                                            }
-                                        });
+                                        UpdatePlayer(PlayerId, "foods", (foods_now + 1 + i).toString())
+                                            .then((Success) => {
+                                                if (!Success) {
+                                                    console.error(`Failed to update ${PlayerId}`);
+                                                }
+                                            });
 
-                                    const embed = new EmbedBuilder()
-                                        .setTitle('購買成功!')
-                                        .setColor("Random")
-                                        .addFields({ name: '已購買: ', value: "1", inline: true },);
-                                    interaction.followUp({ embeds: [embed] });
-                                } else {
-                                    const embed = new EmbedBuilder()
-                                        .setTitle('購買失敗!')
-                                        .setColor("Random");
-                                    interaction.followUp({ embeds: [embed] });
-                                }
-                            } else if (customId == "storeItem2") {
-                                if (money_now >= 200) {
-                                    UpdatePlayer(PlayerId, "money", money_now - 200)
-                                        .then((Success) => {
-                                            if (!Success) {
-                                                console.error(`Failed to update ${PlayerId}`);
-                                            }
-                                        });
-
-                                    UpdatePlayer(PlayerId, "foods", foods_now + 2)
-                                        .then((Success) => {
-                                            if (!Success) {
-                                                console.error(`Failed to update ${PlayerId}`);
-                                            }
-                                        });
-
-                                    const embed = new EmbedBuilder()
-                                        .setTitle('購買成功!')
-                                        .setColor("Random")
-                                        .addFields({ name: '已購買: ', value: "2", inline: true },);
-                                    interaction.followUp({ embeds: [embed] });
-                                } else {
-                                    const embed = new EmbedBuilder()
-                                        .setTitle('購買失敗!')
-                                        .setColor("Random");
-                                    interaction.followUp({ embeds: [embed] });
-                                }
-                            } else if (customId == "storeItem3") {
-                                if (money_now >= 300) {
-                                    UpdatePlayer(PlayerId, "money", money_now - 300)
-                                        .then((Success) => {
-                                            if (!Success) {
-                                                console.error(`Failed to update ${PlayerId}`);
-                                            }
-                                        });
-
-                                    UpdatePlayer(PlayerId, "foods", foods_now + 3)
-                                        .then((Success) => {
-                                            if (!Success) {
-                                                console.error(`Failed to update ${PlayerId}`);
-                                            }
-                                        });
-
-                                    const embed = new EmbedBuilder()
-                                        .setTitle('購買成功!')
-                                        .setColor("Random")
-                                        .addFields({ name: '已購買: ', value: "3", inline: true },);
-                                    interaction.followUp({ embeds: [embed] });
-                                } else {
-                                    const embed = new EmbedBuilder()
-                                        .setTitle('購買失敗!')
-                                        .setColor("Random");
-                                    interaction.followUp({ embeds: [embed] });
+                                        const embed = new EmbedBuilder()
+                                            .setTitle('購買成功!')
+                                            .setColor("Random")
+                                            .addFields({ name: '已購買: ', value: (i + 1).toString(), inline: true },);
+                                        interaction.followUp({ embeds: [embed] });
+                                    } else {
+                                        const embed = new EmbedBuilder()
+                                            .setTitle('購買失敗!')
+                                            .setColor("Random");
+                                        interaction.followUp({ embeds: [embed] });
+                                    }
                                 }
                             }
-
                             collector.stop();
                         });
                     }
                     else if (customId == "rest") {
-                        
+
                         const embed = new EmbedBuilder()
                             .setTitle('還沒有東西喔...沒寵物')
                             .setColor("Random")
