@@ -67,15 +67,10 @@ module.exports = {
                 const ShopRow = new ActionRowBuilder().addComponents(storeItem1, storeItem2, storeItem3);
                 const statButton = new ButtonBuilder()
                     .setStyle(ButtonStyle.Primary)
-                    .setCustomId('stat')
+                    .setCustomId('status')
                     // .setURL('')
-                    .setLabel('👥狀態--stat');
+                    .setLabel('👥狀態--status');
 
-                const shineButton = new ButtonBuilder()
-                    .setStyle(ButtonStyle.Primary)
-                    .setCustomId('shine')
-                    // .setURL('')
-                    .setLabel('🌟照神聖的光--\"Let there be light\"');
                 const restButton = new ButtonBuilder()
                     .setStyle(ButtonStyle.Primary)
                     .setCustomId('rest')
@@ -225,6 +220,7 @@ module.exports = {
                         });
                     }
                     else if (customId == "rest") {
+                        
                         const embed = new EmbedBuilder()
                             .setTitle('還沒有東西喔...沒寵物')
                             .setColor("Random")
