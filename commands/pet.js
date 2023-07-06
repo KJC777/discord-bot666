@@ -131,8 +131,11 @@ module.exports = {
                             const customId2 = collected.customId;
                             if(customId == "storeItem1") {
 
-                            }
+                            } else if(customId == "storeItem2") {
 
+                            } else if(customId == "storeItem3") {
+
+                            }
 
                             collector.stop();
                         });
