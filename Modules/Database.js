@@ -57,12 +57,12 @@ function InitDb() {
         */
         let sql = `
         CREATE TABLE IF NOT EXISTS players(
-            id TEXT PRIMARY KEY,
-            money TEXT,
-            pet_hungry TEXT,
-            pet_fatigue TEXT,
-            age TEXT,
-            foods TEXT
+            PlayerId TEXT PRIMARY KEY,
+            money INT,
+            pet_hungry INT,
+            pet_fatigue INT,
+            age INT,
+            foods INT
         );
         `;
         db.serialize(() => {
@@ -125,7 +125,7 @@ function SearchPlayer(PlayerId) {
         const db = OpenConnection();
         let sql = `
         SELECT * FROM players
-        WHERE ID = ${PlayerId};
+        WHERE PlayerId = ${PlayerId};
         `;
         db.all(sql, (error, Results) => {
             db.close();
@@ -138,6 +138,21 @@ function SearchPlayer(PlayerId) {
     });
 }
 
+function PlayerData(PlayerId, type) {
+    return new Promise((resolve) => {
+        const db = OpenConnection();
+        let sql = `SELECT ${type} FROM players WHERE ` + `PlayerId = ${PlayerId};`;
+        db.all(sql, (error, Results) => {
+            db.close();
+            if (error) {
+                console.error(error);
+                return resolve(false);
+            }
+            return resolve(Results[0][type]);
+        });
+    });
+}
+
 function UpdatePlayer(PlayerId, type, value) {
     return new Promise((resolve) => {
         const db = OpenConnection();
@@ -145,11 +160,7 @@ function UpdatePlayer(PlayerId, type, value) {
         TODO:
         怎樣才能 UPDATE 一個記錄 🤔
         */
-        let sql = `
-        UPDATE players
-        SET ` + type + ` = ${value}
-        WHERE id = ${PlayerId};
-        `;
+        let sql = "UPDATE players SET " + type + ` = ${value} WHERE PlayerId = ${PlayerId};`;
         db.exec(sql, (error) => {
             if (error) {
                 console.error(error);
@@ -167,4 +178,5 @@ module.exports = {
     ListPlayers: ListPlayers,
     SearchPlayer: SearchPlayer,
     UpdatePlayer: UpdatePlayer,
+    PlayerData: PlayerData,
 };
