@@ -17,17 +17,17 @@ module.exports = {
         // .setDescription(`結果：${earnings}元\n你現在有 ${players[i].money} 元!`);
         // interaction.reply({ embeds: [diceEmbed] });
 
-        
+
         const shop = new EmbedBuilder()
-        .setTitle('這裡是商店 !\nTHE SHOP !')
-        .setColor("Random")
+            .setTitle('這裡是商店 !\nTHE SHOP !')
+            .setColor("Random")
 
         const storeButton = new ButtonBuilder()
             .setStyle(ButtonStyle.Primary)
             .setCustomId('store')
             // .setURL('')
             .setLabel('🏪商店--store');
-        
+
         const storeItem1 = new ButtonBuilder()
             .setStyle(ButtonStyle.Primary)
             .setCustomId('storeItem1')
@@ -43,7 +43,7 @@ module.exports = {
             .setCustomId('storeItem3')
             // .setURL('')
             .setLabel('🐟魚3 fish3');
-        
+
         const ShopRow = new ActionRowBuilder().addComponents(storeItem1, storeItem2, storeItem3);
         const statButton = new ButtonBuilder()
             .setStyle(ButtonStyle.Primary)
@@ -112,7 +112,7 @@ module.exports = {
 
                     const customId = collected.customId;
                     //利用玩家所按按鈕的 customId 來判斷玩家的選擇
-                    if (customId == "stat") {
+                    if (customId == "status") {
                         // console.log(money_now);
                         const embed = new EmbedBuilder()
                             .setTitle('Status: ')
@@ -125,16 +125,69 @@ module.exports = {
                         interaction.followUp({ embeds: [embed] });
                     }
                     else if (customId == "store") {
-                        collected.update({ embeds: [shop] , components: [ShopRow] });
+                        collected.update({ embeds: [shop], components: [ShopRow] });
                         const collector = interaction.channel.createMessageComponentCollector({ time: 10000 });
+                        let money_now = await PlayerData(PlayerId, "money");
                         collector.on('collect', collected => {
-                            const customId2 = collected.customId;
-                            if(customId == "storeItem1") {
-
-                            } else if(customId == "storeItem2") {
-
-                            } else if(customId == "storeItem3") {
-
+                            const customId = collected.customId;
+                            //
+                            if (customId == "storeItem1") {
+                                if (money_now >= 100) {
+                                    UpdatePlayer(PlayerId, "money", money_now - 100)
+                                        .then((Success) => {
+                                            if (!Success) {
+                                                console.error(`Failed to update ${PlayerId}`);
+                                            }
+                                        });
+                                    const embed = new EmbedBuilder()
+                                        .setTitle('購買成功!')
+                                        .setColor("Random")
+                                        .addFields({ name: '已購買: ', value: "1", inline: true },);
+                                    interaction.followUp({ embeds: [embed] });
+                                } else {
+                                    const embed = new EmbedBuilder()
+                                        .setTitle('購買失敗!')
+                                        .setColor("Random");
+                                    interaction.followUp({ embeds: [embed] });
+                                }
+                            } else if (customId == "storeItem2") {
+                                if (money_now >= 200) {
+                                    UpdatePlayer(PlayerId, "money", money_now - 200)
+                                        .then((Success) => {
+                                            if (!Success) {
+                                                console.error(`Failed to update ${PlayerId}`);
+                                            }
+                                        });
+                                    const embed = new EmbedBuilder()
+                                        .setTitle('購買成功!')
+                                        .setColor("Random")
+                                        .addFields({ name: '已購買: ', value: 2, inline: true },);
+                                    interaction.followUp({ embeds: [embed] });
+                                } else {
+                                    const embed = new EmbedBuilder()
+                                        .setTitle('購買失敗!')
+                                        .setColor("Random");
+                                    interaction.followUp({ embeds: [embed] });
+                                }
+                            } else if (customId == "storeItem3") {
+                                if (money_now >= 300) {
+                                    UpdatePlayer(PlayerId, "money", money_now - 300)
+                                        .then((Success) => {
+                                            if (!Success) {
+                                                console.error(`Failed to update ${PlayerId}`);
+                                            }
+                                        });
+                                    const embed = new EmbedBuilder()
+                                        .setTitle('購買成功!')
+                                        .setColor("Random")
+                                        .addFields({ name: '已購買: ', value: 3, inline: true },);
+                                    interaction.followUp({ embeds: [embed] });
+                                } else {
+                                    const embed = new EmbedBuilder()
+                                        .setTitle('購買失敗!')
+                                        .setColor("Random");
+                                    interaction.followUp({ embeds: [embed] });
+                                }
                             }
 
                             collector.stop();
