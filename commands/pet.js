@@ -42,7 +42,7 @@ module.exports = {
                 const FirstEmbed = new EmbedBuilder()
                     .setColor("#ffffff")
                     .setTitle(`全新寵物`)
-                    .setImage("https://i.imgur.com/F3fYNU2.gif");                
+                    .setImage("https://i.imgur.com/F3fYNU2.gif");
 
                 const shop = new EmbedBuilder()
                     .setTitle('這裡是商店 !\nTHE SHOP !')
@@ -108,7 +108,7 @@ module.exports = {
                 // let age = 
 
                 //回覆
-                if(First == true) {
+                if (First == true) {
                     interaction.reply({ embeds: [FirstEmbed], components: [buttonRow, buttonRow2] });
                 } else {
                     interaction.reply({ embeds: [buttonEmbed], components: [buttonRow, buttonRow2] });
@@ -145,94 +145,43 @@ module.exports = {
                         collector.on('collect', collected => {
                             const customId = collected.customId;
                             //
-                            if (customId == "storeItem1") {
-                                if (money_now >= 100) {
-                                    UpdatePlayer(PlayerId, "money", money_now - 100)
-                                        .then((Success) => {
-                                            if (!Success) {
-                                                console.error(`Failed to update ${PlayerId}`);
-                                            }
-                                        });
+                            let store_items = ["storeItem1", "storeItem2", "storeItem3"];
+                            for (let i = 0; i < 3; i++) {
+                                if (customId == store_items[i]) {
+                                    if (parseInt(money_now) >= 100 * (1 + i)) {
+                                        is_money_enough = true;
+                                        UpdatePlayer(PlayerId, "money", (money_now - 100).toString())
+                                            .then((Success) => {
+                                                if (!Success) {
+                                                    console.error(`Failed to update ${PlayerId}`);
+                                                }
+                                            });
 
-                                    UpdatePlayer(PlayerId, "foods", foods_now + 1)
-                                        .then((Success) => {
-                                            if (!Success) {
-                                                console.error(`Failed to update ${PlayerId}`);
-                                            }
-                                        });
+                                        UpdatePlayer(PlayerId, "foods", (foods_now + 1 + i).toString())
+                                            .then((Success) => {
+                                                if (!Success) {
+                                                    console.error(`Failed to update ${PlayerId}`);
+                                                }
+                                            });
 
-                                    const embed = new EmbedBuilder()
-                                        .setTitle('購買成功!')
-                                        .setColor("Random")
-                                        .addFields({ name: '已購買: ', value: "1", inline: true },);
-                                    interaction.followUp({ embeds: [embed] });
-                                } else {
-                                    const embed = new EmbedBuilder()
-                                        .setTitle('購買失敗!')
-                                        .setColor("Random");
-                                    interaction.followUp({ embeds: [embed] });
-                                }
-                            } else if (customId == "storeItem2") {
-                                if (money_now >= 200) {
-                                    UpdatePlayer(PlayerId, "money", money_now - 200)
-                                        .then((Success) => {
-                                            if (!Success) {
-                                                console.error(`Failed to update ${PlayerId}`);
-                                            }
-                                        });
-
-                                    UpdatePlayer(PlayerId, "foods", foods_now + 2)
-                                        .then((Success) => {
-                                            if (!Success) {
-                                                console.error(`Failed to update ${PlayerId}`);
-                                            }
-                                        });
-
-                                    const embed = new EmbedBuilder()
-                                        .setTitle('購買成功!')
-                                        .setColor("Random")
-                                        .addFields({ name: '已購買: ', value: "2", inline: true },);
-                                    interaction.followUp({ embeds: [embed] });
-                                } else {
-                                    const embed = new EmbedBuilder()
-                                        .setTitle('購買失敗!')
-                                        .setColor("Random");
-                                    interaction.followUp({ embeds: [embed] });
-                                }
-                            } else if (customId == "storeItem3") {
-                                if (money_now >= 300) {
-                                    UpdatePlayer(PlayerId, "money", money_now - 300)
-                                        .then((Success) => {
-                                            if (!Success) {
-                                                console.error(`Failed to update ${PlayerId}`);
-                                            }
-                                        });
-
-                                    UpdatePlayer(PlayerId, "foods", foods_now + 3)
-                                        .then((Success) => {
-                                            if (!Success) {
-                                                console.error(`Failed to update ${PlayerId}`);
-                                            }
-                                        });
-
-                                    const embed = new EmbedBuilder()
-                                        .setTitle('購買成功!')
-                                        .setColor("Random")
-                                        .addFields({ name: '已購買: ', value: "3", inline: true },);
-                                    interaction.followUp({ embeds: [embed] });
-                                } else {
-                                    const embed = new EmbedBuilder()
-                                        .setTitle('購買失敗!')
-                                        .setColor("Random");
-                                    interaction.followUp({ embeds: [embed] });
+                                        const embed = new EmbedBuilder()
+                                            .setTitle('購買成功!')
+                                            .setColor("Random")
+                                            .addFields({ name: '已購買: ', value: (i + 1).toString(), inline: true },);
+                                        interaction.followUp({ embeds: [embed] });
+                                    } else {
+                                        const embed = new EmbedBuilder()
+                                            .setTitle('購買失敗!')
+                                            .setColor("Random");
+                                        interaction.followUp({ embeds: [embed] });
+                                    }
                                 }
                             }
-
                             collector.stop();
                         });
                     }
                     else if (customId == "rest") {
-                        
+
                         const embed = new EmbedBuilder()
                             .setTitle('還沒有東西喔...沒寵物')
                             .setColor("Random")
