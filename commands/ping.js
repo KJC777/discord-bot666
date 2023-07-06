@@ -43,7 +43,7 @@ module.exports = {
                 },
             ],
             image: {
-                url: 'https://i.imgur.com/AfFp7pu.png',
+                url: 'https://i.imgur.com/F3fYNU2.gif',
             },
             timestamp: new Date().toISOString(),
             footer: {

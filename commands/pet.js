@@ -98,6 +98,9 @@ module.exports = {
                 //將三個 button 都放入 row 中並回覆 embed 和 row
                 const buttonRow = new ActionRowBuilder().addComponents(storeButton, statButton, restButton);
                 const buttonRow2 = new ActionRowBuilder().addComponents(exerciseButton, codeButton, feedButton);
+
+                let age = 
+
                 //回覆
                 interaction.reply({ embeds: [buttonEmbed], components: [buttonRow, buttonRow2] });
 
