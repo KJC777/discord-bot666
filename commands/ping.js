@@ -3,13 +3,56 @@ module.exports = {
 
     data: new SlashCommandBuilder().setName("ping").setDescription("reply with pong!"),
     async execute(client, interaction) {
-        const embed = new EmbedBuilder()
-        .setTitle('I\'m an Embed')
-        .setColor("Random")
-        .setImage("https://imgur.com/a/sB7a4gY")
-        // .attachFiles([{name: '004.gif', attachment: 'file:///C:/Users/%E8%A8%B1%E5%AE%B8%E7%A0%94/Documents/GitHub/discord-bot666/004.gif'}])
-        // .setImage("attachment://004.gif")
-        .addFields({ name: 'Inline field title', value: 'Some value here', inline: true });
-        await interaction.reply({ embeds: [embed] });
+        const exampleEmbed = {
+            color: 0x0099ff,
+            title: 'Some title',
+            url: 'https://discord.js.org',
+            author: {
+                name: 'Some name',
+                icon_url: 'https://i.imgur.com/AfFp7pu.png',
+                url: 'https://discord.js.org',
+            },
+            description: 'Some description here',
+            thumbnail: {
+                url: 'https://i.imgur.com/AfFp7pu.png',
+            },
+            fields: [
+                {
+                    name: 'Regular field title',
+                    value: 'Some value here',
+                },
+                {
+                    name: '\u200b',
+                    value: '\u200b',
+                    inline: false,
+                },
+                {
+                    name: 'Inline field title',
+                    value: 'Some value here',
+                    inline: true,
+                },
+                {
+                    name: 'Inline field title',
+                    value: 'Some value here',
+                    inline: true,
+                },
+                {
+                    name: 'Inline field title',
+                    value: 'Some value here',
+                    inline: true,
+                },
+            ],
+            image: {
+                url: 'https://i.imgur.com/AfFp7pu.png',
+            },
+            timestamp: new Date().toISOString(),
+            footer: {
+                text: 'Some footer text here',
+                icon_url: 'https://i.imgur.com/AfFp7pu.png',
+            },
+        };
+        
+        channel.send({ embeds: [exampleEmbed] });
+        // await interaction.reply({ embeds: [exampleEmbed] });
     },
 };
