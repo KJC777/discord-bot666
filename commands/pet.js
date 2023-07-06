@@ -114,39 +114,46 @@ module.exports = {
                     .setLabel('⌨️打code--coding');
 
                 const feedButton = new ButtonBuilder()
-                    .setStyle(ButtonStyle.Primary)
-                    .setCustomId('feed')
-                    // .setURL('')
-                    .setLabel('🍞餵食--feed');
-
+                .setStyle(ButtonStyle.Primary)
+                .setCustomId('feed')
+                // .setURL('')
+                .setLabel('🍞餵食--feed');
+                
                 //將三個 button 都放入 row 中並回覆 embed 和 row
                 const buttonRowEGG = new ActionRowBuilder().addComponents(statButton, storeButton, shineButton);
                 const buttonRowYOUNG = new ActionRowBuilder().addComponents(statButton, storeButton, feedButton, exerciseButton);
                 const buttonRowOLD1 = new ActionRowBuilder().addComponents(statButton, storeButton, feedButton);
                 const buttonRowOLD2 = new ActionRowBuilder().addComponents(exerciseButton, codeButton, feedButton);
-
+                
                 //回覆
-                let age_now = parseInt(PlayerData(PlayerId, "age"));
-                if (First == true) {
-                    //
-                    // add GIF
-                    //
-                    if (age_now < 3) {
-                        interaction.reply({ embeds: [FirstEmbed], components: [buttonRowEGG]});
-                    } else if (age_now < 6) {
-                        interaction.reply({ embeds: [FirstEmbed], components: [buttonRowYOUNG] });
+                PlayerData(PlayerId, "age")
+                .then(age =>{
+                    let age_now = parseInt(age);
+                    if (First == true) {
+                        //
+                        // add GIF
+                        //
+                        if (age_now < 3) {
+                            interaction.reply({ embeds: [FirstEmbed], components: [buttonRowEGG]});
+                        } else if (age_now < 6) {
+                            interaction.reply({ embeds: [FirstEmbed], components: [buttonRowYOUNG] });
+                        } else {
+                            interaction.reply({ embeds: [FirstEmbed], components: [buttonRowOLD1, buttonRowOLD2] });
+                        }
                     } else {
-                        interaction.reply({ embeds: [FirstEmbed], components: [buttonRowOLD1, buttonRowOLD2] });
+                        if (age_now < 3) {
+                            interaction.reply({ embeds: [FirstEmbed], components: [buttonRowEGG]});
+                        } else if (age_now < 6) {
+                            interaction.reply({ embeds: [FirstEmbed], components: [buttonRowYOUNG] });
+                        } else {
+                            interaction.reply({ embeds: [FirstEmbed], components: [buttonRowOLD1, buttonRowOLD2] });
+                        }
                     }
-                } else {
-                    if (age_now < 3) {
-                        interaction.reply({ embeds: [FirstEmbed], components: [buttonRowEGG]});
-                    } else if (age_now < 6) {
-                        interaction.reply({ embeds: [FirstEmbed], components: [buttonRowYOUNG] });
-                    } else {
-                        interaction.reply({ embeds: [FirstEmbed], components: [buttonRowOLD1, buttonRowOLD2] });
-                    }
-                }
+                })
+                .catch(error => {
+                    // Handle any errors that occurred during the promise
+                    console.error(error);
+                });
                 //建立 collector
                 const collector = interaction.channel.createMessageComponentCollector({ time: 15000 });
 
