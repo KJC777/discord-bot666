@@ -38,27 +38,73 @@ module.exports = {
                 //     .setColor("#ffffff")
                 //     .setTitle(`主選單--Pet menu`)
 
-                const eggEmbed = new EmbedBuilder()
-                    .setColor("#ffffff")
-                    .setTitle("蛋主選單\-\-Pet menu")
-                    .setImage("https://i.imgur.com/71ELEmK.gif")
-                    
-                const youngEmbed = new EmbedBuilder()
-                    .setColor("#ffffff")
-                    .setTitle("幼年主選單\-\-Pet menu")
-                    .setImage("https://i.imgur.com/NrFzY1p.gif")
-                
-                const oldEmbed = new EmbedBuilder()
-                    .setColor("#ffffff")
-                    .setTitle("成年主選單\-\-Pet menu")
-                    .setImage("https://i.imgur.com/0RfaFwU.gif")
+                const eggEmbed = {
+                    color: 0x0099ff,
+                    title: '蛋主選單\-\-Pet menu',
+                    author: {
+                        name: '來玩🦖吧！',
+                        icon_url: 'https://i.imgur.com/yWdzTb2.png',
+                    },
+                    description: 'Some description here',            
+                    image: {
+                        url: 'https://i.imgur.com/71ELEmK.gif', // 吃魚
+                    },
+                    timestamp: new Date().toISOString(),
+                    footer: {
+                        text: '由第🦖小隊~666製作✨',
+                    },
+                };
+                const youngEmbed = {
+                    color: 0x0099ff,
+                    title: '幼年主選單\-\-Pet menu',
+                    author: {
+                        name: '來玩🦖吧！',
+                        icon_url: 'https://i.imgur.com/yWdzTb2.png',
+                    },
+                    description: 'Some description here',            
+                    image: {
+                        url: 'https://i.imgur.com/NrFzY1p.gif', // 吃魚
+                    },
+                    timestamp: new Date().toISOString(),
+                    footer: {
+                        text: '由第🦖小隊~666製作✨',
+                    },
+                };
+                const oldEmbed = {
+                    color: 0x0099ff,
+                    title: '成年主選單\-\-Pet menu',
+                    author: {
+                        name: '來玩🦖吧！',
+                        icon_url: 'https://i.imgur.com/yWdzTb2.png',
+                    },
+                    description: 'Some description here',            
+                    image: {
+                        url: 'https://i.imgur.com/0RfaFwU.gif', // 吃魚
+                    },
+                    timestamp: new Date().toISOString(),
+                    footer: {
+                        text: '由第🦖小隊~666製作✨',
+                    },
+                };
                 // .setDescription(`結果：${earnings}元\n你現在有 ${players[i].money} 元!`);
                 // interaction.reply({ embeds: [diceEmbed] });
-
-                const FirstEmbed = new EmbedBuilder()
-                    .setColor("#ffffff")
-                    .setTitle(`全新寵物(把他養大以解鎖各種功能)`)
-                    .setImage("https://i.imgur.com/B7FbeSb.png");
+                
+                const FirstEmbed = {
+                    color: 0x0099ff,
+                    title: '全新寵物(把他養大以解鎖各種功能)',
+                    author: {
+                        name: '來玩🦖吧！',
+                        icon_url: 'https://i.imgur.com/yWdzTb2.png',
+                    },
+                    description: 'Some description here',            
+                    image: {
+                        url: 'https://i.imgur.com/B7FbeSb.png', // 吃魚
+                    },
+                    timestamp: new Date().toISOString(),
+                    footer: {
+                        text: '由第🦖小隊~666製作✨',
+                    },
+                };
 
                 const shop = new EmbedBuilder()
                     .setTitle('這裡是商店 !\nTHE SHOP !')
