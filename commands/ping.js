@@ -52,7 +52,7 @@ module.exports = {
             },
         };
         
-        channel.send({ embeds: [exampleEmbed] });
-        // await interaction.reply({ embeds: [exampleEmbed] });
+        await interaction.reply({ embeds: [exampleEmbed] });
+        // channel.send({ embeds: [exampleEmbed] });
     },
 };
