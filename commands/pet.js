@@ -17,10 +17,12 @@ module.exports = {
         const start_pet_fatigue = 0;
         const start_age = 0;
         const start_foods = 0;
+        let First = false;
 
         SearchPlayer(PlayerId)
             .then((Result) => {
                 if (Result.length == 0) {
+                    First = true;
                     AddPlayer(PlayerId, start_money, start_pet_hungry, start_pet_fatigue, start_age, start_foods)
                         .then((Success) => {
                             if (!Success) {
@@ -37,6 +39,10 @@ module.exports = {
                 // .setDescription(`結果：${earnings}元\n你現在有 ${players[i].money} 元!`);
                 // interaction.reply({ embeds: [diceEmbed] });
 
+                const FirstEmbed = new EmbedBuilder()
+                    .setColor("#ffffff")
+                    .setTitle(`全新寵物`)
+                    .setImage("https://i.imgur.com/F3fYNU2.gif");                
 
                 const shop = new EmbedBuilder()
                     .setTitle('這裡是商店 !\nTHE SHOP !')
@@ -99,11 +105,14 @@ module.exports = {
                 const buttonRow = new ActionRowBuilder().addComponents(storeButton, statButton, restButton);
                 const buttonRow2 = new ActionRowBuilder().addComponents(exerciseButton, codeButton, feedButton);
 
-                let age = 
+                // let age = 
 
                 //回覆
-                interaction.reply({ embeds: [buttonEmbed], components: [buttonRow, buttonRow2] });
-
+                if(First == true) {
+                    interaction.reply({ embeds: [FirstEmbed], components: [buttonRow, buttonRow2] });
+                } else {
+                    interaction.reply({ embeds: [buttonEmbed], components: [buttonRow, buttonRow2] });
+                }
                 //建立 collector
                 const collector = interaction.channel.createMessageComponentCollector({ time: 15000 });
 
