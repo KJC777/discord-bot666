@@ -8,42 +8,17 @@ module.exports = {
             title: 'Some title',
             url: 'https://discord.js.org',
             author: {
-                name: 'Some name',
-                icon_url: 'https://i.imgur.com/AfFp7pu.png',
-                url: 'https://discord.js.org',
+                name: '六角龍小隊!',
+                // icon_url: 'https://i.imgur.com/yWdzTb2.png',
+                url: 'https://camp.csie.cool',
             },
             description: 'Some description here',
             thumbnail: {
-                url: 'https://i.imgur.com/AfFp7pu.png',
+                url: 'https://i.imgur.com/yWdzTb2.png',
             },
-            fields: [
-                {
-                    name: 'Regular field title',
-                    value: 'Some value here',
-                },
-                {
-                    name: '\u200b',
-                    value: '\u200b',
-                    inline: false,
-                },
-                {
-                    name: 'Inline field title',
-                    value: 'Some value here',
-                    inline: true,
-                },
-                {
-                    name: 'Inline field title',
-                    value: 'Some value here',
-                    inline: true,
-                },
-                {
-                    name: 'Inline field title',
-                    value: 'Some value here',
-                    inline: true,
-                },
-            ],
+            
             image: {
-                url: 'https://i.imgur.com/F3fYNU2.gif',
+                url: 'https://i.imgur.com/1O4cla2.gif', // 吃魚
             },
             timestamp: new Date().toISOString(),
             footer: {
