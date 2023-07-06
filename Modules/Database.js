@@ -58,7 +58,11 @@ function InitDb() {
         let sql = `
         CREATE TABLE IF NOT EXISTS players(
             id TEXT PRIMARY KEY,
-            money TEXT
+            money TEXT,
+            pet_hungry TEXT,
+            pet_fatigue TEXT,
+            age TEXT,
+            foods TEXT
         );
         `;
         db.serialize(() => {
@@ -77,7 +81,7 @@ function InitDb() {
 }
 
 
-function AddPlayer(PlayerId, Value){
+function AddPlayer(PlayerId, money, pet_hungry, pet_fatigue, age, foods){
     return new Promise((resolve) => {
         const db = OpenConnection();
         /*
@@ -85,8 +89,8 @@ function AddPlayer(PlayerId, Value){
         應該還記得怎樣 INSERT 資料進去吧 🥺
         */
         let sql = `
-        INSERT INTO players(id, money)
-        VALUES("${PlayerId}", ${Value});
+        INSERT INTO players(PlayerId, money, pet_hungry, pet_fatigue, age, foods)
+        VALUES("${PlayerId}", ${money}, ${pet_hungry}, ${pet_fatigue}, ${age}, ${foods});
         `
         db.exec(sql, (error) => {
             if (error){
@@ -102,12 +106,6 @@ function AddPlayer(PlayerId, Value){
 function ListPlayers() {
     return new Promise((resolve) => {
         const db = OpenConnection();
-        /*
-        TODO:
-        我們怎樣才能把叫 Players 的資料表上的資料拿出來
-
-        小朋友才做選擇，我全部都要
-        */
         let sql = `
         SELECT * FROM players;
         `;
@@ -125,10 +123,6 @@ function ListPlayers() {
 function SearchPlayer(PlayerId) {
     return new Promise((resolve) => {
         const db = OpenConnection();
-        /*
-        TODO:
-        欸欸怎樣才能找到一個某特定的記錄 (wait WHERE am I...🤔)
-        */
         let sql = `
         SELECT * FROM players
         WHERE ID = ${PlayerId};
@@ -144,7 +138,7 @@ function SearchPlayer(PlayerId) {
     });
 }
 
-function UpdatePlayer(PlayerId, NewVal) {
+function UpdatePlayer(PlayerId, type, value) {
     return new Promise((resolve) => {
         const db = OpenConnection();
         /*
@@ -153,7 +147,7 @@ function UpdatePlayer(PlayerId, NewVal) {
         */
         let sql = `
         UPDATE players
-        SET money = ${NewVal}
+        SET ` + type + ` = ${value}
         WHERE id = ${PlayerId};
         `;
         db.exec(sql, (error) => {
