@@ -65,17 +65,22 @@ module.exports = {
         // console.log(collected);
 
         const PlayerId = interaction.user.id;
+        const start_money = 500;
+        const start_pet_hungry = 0;
+        const start_pet_fatigue = 0;
+        const start_age = 0;
+        const start_foods = 0;
         SearchPlayer(PlayerId)
         .then((Result) => {
             if (Result.length == 0){
-                AddPlayer(PlayerId, FinalVal)
+                AddPlayer(PlayerId, )
                 .then((Success) => {
                     if (!Success){
                         console.error(`Failed to add ${PlayerId} to DB`);
                     }
                 });
             } else {
-                UpdatePlayer(PlayerId, FinalVal)
+                UpdatePlayer(PlayerId, start_money, start_pet_hungry, start_age, start_foods)
                 .then((Success) => {
                     if (!Success){
                         console.error(`Failed to update ${PlayerId}`);
