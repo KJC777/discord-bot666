@@ -60,12 +60,11 @@ module.exports = {
 
         //建立 collector
         const collector = interaction.channel.createMessageComponentCollector({ time: 15000 });
-        collector.on('collect', collected => {
 
         // console.log(collected);
         
         //等待 collector 蒐集到玩家案的按鈕
-        //collector.on('collect', async collected => {
+        collector.on('collect', async collected => {
 
             const customId = collected.customId;
             //利用玩家所按按鈕的 customId 來判斷玩家的選擇
@@ -81,16 +80,32 @@ module.exports = {
                 interaction.followup({ embeds: [embed] });
             }
             else if(customId == "rest"){
-
+                const embed = new EmbedBuilder()
+                    .setTitle('還沒有東西喔...沒寵物')
+                    .setColor("Random")
+                    .addFields({ name: '.....', value: '只是個示範', inline: true });
+                interaction.followup({ embeds: [embed] });
             }
             else if(customId == "excercise"){
-
+                const embed = new EmbedBuilder()
+                    .setTitle('還沒有東西喔...沒code')
+                    .setColor("Random")
+                    .addFields({ name: 'yeet', value: '只是個示範', inline: true });
+                interaction.followup({ embeds: [embed] });
             }
             else if(customId == "code"){
-
+                const embed = new EmbedBuilder()
+                    .setTitle('還沒有東西喔...沒辦法')
+                    .setColor("Random")
+                    .addFields({ name: 'KK', value: '只是個示範', inline: true });
+                interaction.followup({ embeds: [embed] });
             }
             else if(customId == "feed"){
-
+                const embed = new EmbedBuilder()
+                    .setTitle('還沒有東西喔...沒食物')
+                    .setColor("Random")
+                    .addFields({ name: 'QQ', value: '只是個示範', inline: true });
+                interaction.followup({ embeds: [embed] });
             }
             
             // //讀取 players.json 並 parse 成 players
