@@ -71,7 +71,11 @@ module.exports = {
             //利用玩家所按按鈕的 customId 來判斷玩家的選擇
             let playerChoice;
             if(customId == "stat"){
-                
+                const embed = new EmbedBuilder()
+                    .setTitle('還沒有東西喔...')
+                    .setColor("Random")
+                    .addFields({ name: '*', value: '商品1只是個示範', inline: true });
+                interaction.followUp({ embeds: [embed] });
             }
             else if(customId == "store"){
                 const embed = new EmbedBuilder()
