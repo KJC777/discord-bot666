@@ -18,13 +18,13 @@ module.exports = {
         // interaction.reply({ embeds: [diceEmbed] });
 
         const storeButton = new ButtonBuilder()   
-        .setStyle(ButtonStyle.Success)
+        .setStyle(ButtonStyle.Primary)
         .setCustomId('store')
         // .setURL('')
         .setLabel('store');
         
         const statButton = new ButtonBuilder()
-        .setStyle(ButtonStyle.Secondary)
+        .setStyle(ButtonStyle.Primary)
         .setCustomId('stat')
         // .setURL('')
         .setLabel('stat');
