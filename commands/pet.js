@@ -111,7 +111,7 @@ module.exports = {
                     .setColor("Random")
 
                 const storeButton = new ButtonBuilder()
-                    .setStyle(ButtonStyle.Primary)
+                    .setStyle(ButtonStyle.Success)
                     .setCustomId('store')
                     // .setURL('')
                     .setLabel('🏪商店--store');
@@ -134,7 +134,7 @@ module.exports = {
 
                 const ShopRow = new ActionRowBuilder().addComponents(storeItem1, storeItem2, storeItem3);
                 const statButton = new ButtonBuilder()
-                    .setStyle(ButtonStyle.Primary)
+                    .setStyle(ButtonStyle.Success)
                     .setCustomId('status')
                     // .setURL('')
                     .setLabel('👥狀態--status');
