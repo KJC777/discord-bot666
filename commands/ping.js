@@ -6,7 +6,7 @@ module.exports = {
         const embed = new EmbedBuilder()
         .setTitle('I\'m an Embed')
         .setColor("Random")
-        .setImage("https://imgur.com/a/sB7a4gY")
+        .setImage("https://i.imgur.com/QtZlT5r.gif")
         // .attachFiles([{name: '004.gif', attachment: 'file:///C:/Users/%E8%A8%B1%E5%AE%B8%E7%A0%94/Documents/GitHub/discord-bot666/004.gif'}])
         // .setImage("attachment://004.gif")
         .addFields({ name: 'Inline field title', value: 'Some value here', inline: true });
