@@ -54,8 +54,8 @@ module.exports = {
 
                 const FirstEmbed = new EmbedBuilder()
                     .setColor("#ffffff")
-                    .setTitle(`全新寵物`)
-                    .setImage("https://i.imgur.com/F3fYNU2.gif");
+                    .setTitle(`全新寵物(把他養大以解鎖各種功能)`)
+                    .setImage("https://i.imgur.com/B7FbeSb.png");
 
                 const shop = new EmbedBuilder()
                     .setTitle('這裡是商店 !\nTHE SHOP !')
