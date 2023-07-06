@@ -10,83 +10,6 @@ module.exports = {
         .setDescription('Have your discord pet!'),
 
     async execute(client, interaction) {
-        //建立 embed 和剪刀石頭布的三個 button
-        const buttonEmbed = new EmbedBuilder()
-            .setColor("#ffffff")
-            .setTitle(`主選單--Pet menu`)
-        // .setDescription(`結果：${earnings}元\n你現在有 ${players[i].money} 元!`);
-        // interaction.reply({ embeds: [diceEmbed] });
-
-
-        const shop = new EmbedBuilder()
-            .setTitle('這裡是商店 !\nTHE SHOP !')
-            .setColor("Random")
-
-        const storeButton = new ButtonBuilder()
-            .setStyle(ButtonStyle.Primary)
-            .setCustomId('store')
-            // .setURL('')
-            .setLabel('🏪商店--store');
-
-        const storeItem1 = new ButtonBuilder()
-            .setStyle(ButtonStyle.Primary)
-            .setCustomId('storeItem1')
-            // .setURL('')
-            .setLabel('🐟魚1 fish1');
-        const storeItem2 = new ButtonBuilder()
-            .setStyle(ButtonStyle.Primary)
-            .setCustomId('storeItem2')
-            // .setURL('')
-            .setLabel('🐟魚2 fish2');
-        const storeItem3 = new ButtonBuilder()
-            .setStyle(ButtonStyle.Primary)
-            .setCustomId('storeItem3')
-            // .setURL('')
-            .setLabel('🐟魚3 fish3');
-
-        const ShopRow = new ActionRowBuilder().addComponents(storeItem1, storeItem2, storeItem3);
-        const statButton = new ButtonBuilder()
-            .setStyle(ButtonStyle.Primary)
-            .setCustomId('stat')
-            // .setURL('')
-            .setLabel('👥狀態--stat');
-
-        const restButton = new ButtonBuilder()
-            .setStyle(ButtonStyle.Primary)
-            .setCustomId('rest')
-            // .setURL('')
-            .setLabel('💤休息--rest');
-
-        const exerciseButton = new ButtonBuilder()
-            .setStyle(ButtonStyle.Primary)
-            .setCustomId('exercise')
-            // .setURL('')
-            .setLabel('🏋️運動--exercise');
-
-        const codeButton = new ButtonBuilder()
-            .setStyle(ButtonStyle.Primary)
-            .setCustomId('code')
-            // .setURL('')
-            .setLabel('⌨️打code--coding');
-
-        const feedButton = new ButtonBuilder()
-            .setStyle(ButtonStyle.Primary)
-            .setCustomId('feed')
-            // .setURL('')
-            .setLabel('🍞餵食--feed');
-
-        //將三個 button 都放入 row 中並回覆 embed 和 row
-        const buttonRow = new ActionRowBuilder().addComponents(storeButton, statButton, restButton);
-        const buttonRow2 = new ActionRowBuilder().addComponents(exerciseButton, codeButton, feedButton);
-        //回覆
-        interaction.reply({ embeds: [buttonEmbed], components: [buttonRow, buttonRow2] });
-
-        //建立 collector
-        const collector = interaction.channel.createMessageComponentCollector({ time: 15000 });
-
-        // console.log(collected);
-
-        // await InitDb();
 
         const PlayerId = interaction.user.id;
         const start_money = 500;
@@ -107,6 +30,84 @@ module.exports = {
                 } else {
                     //...  
                 }
+                //建立 embed 和剪刀石頭布的三個 button
+                const buttonEmbed = new EmbedBuilder()
+                    .setColor("#ffffff")
+                    .setTitle(`主選單--Pet menu`)
+                // .setDescription(`結果：${earnings}元\n你現在有 ${players[i].money} 元!`);
+                // interaction.reply({ embeds: [diceEmbed] });
+
+
+                const shop = new EmbedBuilder()
+                    .setTitle('這裡是商店 !\nTHE SHOP !')
+                    .setColor("Random")
+
+                const storeButton = new ButtonBuilder()
+                    .setStyle(ButtonStyle.Primary)
+                    .setCustomId('store')
+                    // .setURL('')
+                    .setLabel('🏪商店--store');
+
+                const storeItem1 = new ButtonBuilder()
+                    .setStyle(ButtonStyle.Primary)
+                    .setCustomId('storeItem1')
+                    // .setURL('')
+                    .setLabel('🐟魚1 fish1');
+                const storeItem2 = new ButtonBuilder()
+                    .setStyle(ButtonStyle.Primary)
+                    .setCustomId('storeItem2')
+                    // .setURL('')
+                    .setLabel('🐟魚2 fish2');
+                const storeItem3 = new ButtonBuilder()
+                    .setStyle(ButtonStyle.Primary)
+                    .setCustomId('storeItem3')
+                    // .setURL('')
+                    .setLabel('🐟魚3 fish3');
+
+                const ShopRow = new ActionRowBuilder().addComponents(storeItem1, storeItem2, storeItem3);
+                const statButton = new ButtonBuilder()
+                    .setStyle(ButtonStyle.Primary)
+                    .setCustomId('stat')
+                    // .setURL('')
+                    .setLabel('👥狀態--stat');
+
+                const restButton = new ButtonBuilder()
+                    .setStyle(ButtonStyle.Primary)
+                    .setCustomId('rest')
+                    // .setURL('')
+                    .setLabel('💤休息--rest');
+
+                const exerciseButton = new ButtonBuilder()
+                    .setStyle(ButtonStyle.Primary)
+                    .setCustomId('exercise')
+                    // .setURL('')
+                    .setLabel('🏋️運動--exercise');
+
+                const codeButton = new ButtonBuilder()
+                    .setStyle(ButtonStyle.Primary)
+                    .setCustomId('code')
+                    // .setURL('')
+                    .setLabel('⌨️打code--coding');
+
+                const feedButton = new ButtonBuilder()
+                    .setStyle(ButtonStyle.Primary)
+                    .setCustomId('feed')
+                    // .setURL('')
+                    .setLabel('🍞餵食--feed');
+
+                //將三個 button 都放入 row 中並回覆 embed 和 row
+                const buttonRow = new ActionRowBuilder().addComponents(storeButton, statButton, restButton);
+                const buttonRow2 = new ActionRowBuilder().addComponents(exerciseButton, codeButton, feedButton);
+                //回覆
+                interaction.reply({ embeds: [buttonEmbed], components: [buttonRow, buttonRow2] });
+
+                //建立 collector
+                const collector = interaction.channel.createMessageComponentCollector({ time: 15000 });
+
+                // console.log(collected);
+
+                // await InitDb();
+
 
                 collector.on('collect', async collected => {
 
@@ -161,7 +162,7 @@ module.exports = {
                                     const embed = new EmbedBuilder()
                                         .setTitle('購買成功!')
                                         .setColor("Random")
-                                        .addFields({ name: '已購買: ', value: 2, inline: true },);
+                                        .addFields({ name: '已購買: ', value: "2", inline: true },);
                                     interaction.followUp({ embeds: [embed] });
                                 } else {
                                     const embed = new EmbedBuilder()
@@ -180,7 +181,7 @@ module.exports = {
                                     const embed = new EmbedBuilder()
                                         .setTitle('購買成功!')
                                         .setColor("Random")
-                                        .addFields({ name: '已購買: ', value: 3, inline: true },);
+                                        .addFields({ name: '已購買: ', value: "3", inline: true },);
                                     interaction.followUp({ embeds: [embed] });
                                 } else {
                                     const embed = new EmbedBuilder()
