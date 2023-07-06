@@ -54,9 +54,10 @@ module.exports = {
         .setLabel('feed');
 
         //將三個 button 都放入 row 中並回覆 embed 和 row
-        const buttonRow = new ActionRowBuilder().addComponents(storeButton, statButton, restButton, exerciseButton, codeButton, feedButton);
+        const buttonRow = new ActionRowBuilder().addComponents(storeButton, statButton, restButton);
+        const buttonRow2 = new ActionRowBuilder().addComponents(exerciseButton, codeButton, feedButton);        
         //回覆
-        interaction.reply({embeds: [buttonEmbed], components: [buttonRow]});
+        interaction.reply({embeds: [buttonEmbed], components: [buttonRow, buttonRow2]});
 
         //建立 collector
         const collector = interaction.channel.createMessageComponentCollector({ time: 15000 });
