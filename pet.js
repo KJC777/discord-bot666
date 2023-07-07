@@ -125,7 +125,14 @@ module.exports = {
                         .addFields({ name: 'QQ', value: '只是個示範', inline: true });
                     interaction.followUp({ embeds: [embed] });
                 }
-                
+                try{
+                    await collected.reply('TEST');
+                }
+                catch(ex) {
+                    message.channel.send("You did not specify a name on time.");
+                    collector.stop();
+                }
+    
                 // //讀取 players.json 並 parse 成 players
                 // const data = fs.readFileSync("players.json");
                 // let players = JSON.parse(data);
@@ -158,9 +165,7 @@ module.exports = {
                 // //stringify players 並存回 players.json
                 // const json = JSON.stringify(players);
                 // fs.writeFileSync("players.json", json);
-                //關閉 collector
-                collector.stop();
-    
+            
             });
         });
     }
