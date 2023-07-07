@@ -21,7 +21,7 @@ module.exports = {
         const start_foods = 0;
         let First = false;
         // await InitDb();
-        
+
 
         SearchPlayer(PlayerId)
             .then((Result) => {
@@ -35,7 +35,7 @@ module.exports = {
                             }
                         });
                 } else {
-                     //..
+                    //..
                 }
 
                 // const defaultEmbed = new EmbedBuilder()
@@ -49,7 +49,7 @@ module.exports = {
                         name: '來玩🦖吧！',
                         icon_url: 'https://i.imgur.com/yWdzTb2.png',
                     },
-                    description: '它現在只是一顆蛋，但它散發著不凡的氣息，或許照照神秘光它能有一些變化',            
+                    description: '它現在只是一顆蛋，但它散發著不凡的氣息，或許照照神秘光它能有一些變化',
                     image: {
                         url: 'https://i.imgur.com/71ELEmK.gif', // 吃魚
                     },
@@ -65,7 +65,7 @@ module.exports = {
                         name: '來玩🦖吧！',
                         icon_url: 'https://i.imgur.com/yWdzTb2.png',
                     },
-                    description: '跟著六角恐龍一起努力成長吧!!',            
+                    description: '跟著六角恐龍一起努力成長吧!!',
                     image: {
                         url: 'https://i.imgur.com/NrFzY1p.gif', // 吃魚
                     },
@@ -81,7 +81,7 @@ module.exports = {
                         name: '來玩🦖吧！',
                         icon_url: 'https://i.imgur.com/yWdzTb2.png',
                     },
-                    description: '超電的工程師蠑螈',            
+                    description: '超電的工程師蠑螈',
                     image: {
                         url: 'https://i.imgur.com/0RfaFwU.gif', // 吃魚
                     },
@@ -90,7 +90,7 @@ module.exports = {
                         text: '由第🦖小隊~666製作✨',
                     },
                 };
-                
+
                 const DeadEmbed = {
                     color: 0x0099ff,
                     title: '死亡',
@@ -98,7 +98,7 @@ module.exports = {
                         name: '來玩🦖吧！',
                         icon_url: 'https://i.imgur.com/yWdzTb2.png',
                     },
-                    description: '有始有終\n再次輸入/pet 重新開始遊戲',            
+                    description: '有始有終\n再次輸入/pet 重新開始遊戲',
                     image: {
                         url: 'https://i.imgur.com/NNtTWfqg.jpg', // 吃魚
                     },
@@ -112,7 +112,7 @@ module.exports = {
 
                 // .setDescription(`結果：${earnings}元\n你現在有 ${players[i].money} 元!`);
                 // interaction.reply({ embeds: [diceEmbed] });
-                
+
                 const FirstEmbed = {
                     color: 0x0099ff,
                     title: '全新寵物(把牠養大以解鎖各種功能)',
@@ -120,7 +120,7 @@ module.exports = {
                         name: '來玩🦖吧！',
                         icon_url: 'https://i.imgur.com/yWdzTb2.png',
                     },
-                    description: '開甚麼玩笑，沒有比養神秘蛋更蝦趴的事了好嗎?',            
+                    description: '開甚麼玩笑，沒有比養神秘蛋更蝦趴的事了好嗎?',
                     image: {
                         url: 'https://i.imgur.com/B7FbeSb.png', // 吃魚
                     },
@@ -158,7 +158,7 @@ module.exports = {
                     .setLabel('🐟魚3 fish3');
 
                 const ShopRow = new ActionRowBuilder().addComponents(storeItem1, storeItem2, storeItem3);
-                
+
                 const statButton = new ButtonBuilder()
                     .setStyle(ButtonStyle.Success)
                     .setCustomId('status')
@@ -199,17 +199,17 @@ module.exports = {
                 const buttonRowYOUNG = new ActionRowBuilder().addComponents(statButton, storeButton, feedButton, exerciseButton);
                 const buttonRowOLD1 = new ActionRowBuilder().addComponents(statButton, storeButton, feedButton);
                 const buttonRowOLD2 = new ActionRowBuilder().addComponents(exerciseButton, codeButton);
-                
+
 
                 //回覆
                 if (First == true) {
-                        interaction.reply({ embeds: [FirstEmbed], components: [buttonRowEGG]}); 
+                    interaction.reply({ embeds: [FirstEmbed], components: [buttonRowEGG] });
                 } else {
                     PlayerData(PlayerId, "age")
-                    .then(age =>{
-                        let age_now = parseInt(age);
+                        .then(age => {
+                            let age_now = parseInt(age);
                             if (age_now < 3) {
-                                interaction.reply({ embeds: [eggEmbed], components: [buttonRowEGG]});
+                                interaction.reply({ embeds: [eggEmbed], components: [buttonRowEGG] });
                             } else if (age_now < 6) {
                                 interaction.reply({ embeds: [youngEmbed], components: [buttonRowYOUNG] });
                             } else if (age_now < 10) {
@@ -218,7 +218,7 @@ module.exports = {
                                 interaction.reply({ embeds: [DeadEmbed] });
                                 DeletePlayer(PlayerId);
                             }
-                    })
+                        })
                 }
                 //建立 collector
                 const collector = interaction.channel.createMessageComponentCollector({ time: 15000 });
@@ -290,9 +290,9 @@ module.exports = {
                                 name: '來玩🦖吧！',
                                 icon_url: 'https://i.imgur.com/yWdzTb2.png',
                             },
-                            description: '你正在幫你的神祕蛋照你買來的一縷聖光',            
+                            description: '你正在幫你的神祕蛋照你買來的一縷聖光',
                             image: {
-                                url: 'https://i.imgur.com/nJkpawf.gif', 
+                                url: 'https://i.imgur.com/nJkpawf.gif',
                             },
                             timestamp: new Date().toISOString(),
                             footer: {
@@ -301,7 +301,7 @@ module.exports = {
                         };
                         await collected.update({ embeds: [embed] });
                         collected.followUp(`好像有甚麼事發生了!!😮...嗎?(1/3機率)`);
-                        if(Math.floor(Math.random() * 3) == 1){
+                        if (Math.floor(Math.random() * 3) == 1) {
                             const embed = {
                                 color: 0x0099ff,
                                 title: '挖賽，孵化!!!',
@@ -309,9 +309,9 @@ module.exports = {
                                     name: '來玩🦖吧！',
                                     icon_url: 'https://i.imgur.com/yWdzTb2.png',
                                 },
-                                description: '將將將將🎉',            
+                                description: '將將將將🎉',
                                 image: {
-                                    url: 'https://i.imgur.com/F3fYNU2.gif', 
+                                    url: 'https://i.imgur.com/F3fYNU2.gif',
                                 },
                                 timestamp: new Date().toISOString(),
                                 footer: {
@@ -339,7 +339,7 @@ module.exports = {
 
 
                         if (hungry_now < 1) {
-                            
+
                             const embed = new EmbedBuilder()
                                 .setTitle(`沒有體力了...`)
                                 .setColor("Random")
@@ -348,7 +348,7 @@ module.exports = {
                             hungry_now -= 1;
                             age_now += 1;
 
-                           
+
 
                             UpdatePlayer(PlayerId, "pet_hungry", hungry_now)
                                 .then((Success) => {
@@ -364,8 +364,8 @@ module.exports = {
                                     }
                                 });
                             let URL = "";
-                            if(age_now -1 > 6) URL ="https://i.imgur.com/lTnqh96.gif";
-                            else URL ="https://i.imgur.com/UWNguNK.gif";
+                            if (age_now - 1 > 6) URL = "https://i.imgur.com/lTnqh96.gif";
+                            else URL = "https://i.imgur.com/UWNguNK.gif";
                             const embed = new EmbedBuilder()
                                 .setTitle(`Exercise: `)
                                 .setColor("Random")
@@ -378,29 +378,37 @@ module.exports = {
                         let hungry_now = parseInt(await PlayerData(PlayerId, "pet_hungry"));
                         let age_now = parseInt(await PlayerData(PlayerId, "age"));
 
-                        hungry_now -= 1;
-                        age_now += 1;
+                        if (hungry_now < 1) {
+                            const embed = new EmbedBuilder()
+                                .setTitle(`沒有體力了...`)
+                                .setColor("Random")
+                            interaction.followUp({ embeds: [embed] });
+                        } else {
 
-                        UpdatePlayer(PlayerId, "pet_hungry", hungry_now)
-                            .then((Success) => {
-                                if (!Success) {
-                                    console.error(`Failed to update ${PlayerId}`);
-                                }
-                            });
+                            hungry_now -= 1;
+                            age_now += 1;
 
-                        UpdatePlayer(PlayerId, "age", age_now)
-                            .then((Success) => {
-                                if (!Success) {
-                                    console.error(`Failed to update ${PlayerId}`);
-                                }
-                            });
-                        
-                        const embed = new EmbedBuilder()
-                            .setTitle(`Code: `)
-                            .setColor("Random")
-                            .setImage(`https://i.imgur.com/heuying.gif`)
-                            .addFields({ name: 'Energy', value: `${hungry_now - 1} => ${hungry_now}`.toString(), inline: true });
-                        interaction.followUp({ embeds: [embed] })
+                            UpdatePlayer(PlayerId, "pet_hungry", hungry_now)
+                                .then((Success) => {
+                                    if (!Success) {
+                                        console.error(`Failed to update ${PlayerId}`);
+                                    }
+                                });
+
+                            UpdatePlayer(PlayerId, "age", age_now)
+                                .then((Success) => {
+                                    if (!Success) {
+                                        console.error(`Failed to update ${PlayerId}`);
+                                    }
+                                });
+
+                            const embed = new EmbedBuilder()
+                                .setTitle(`Code: `)
+                                .setColor("Random")
+                                .setImage(`https://i.imgur.com/heuying.gif`)
+                                .addFields({ name: 'Energy', value: `${hungry_now - 1} => ${hungry_now}`.toString(), inline: true });
+                            interaction.followUp({ embeds: [embed] })
+                        }
                     }
                     else if (customId == "feed") {
                         let foods_now = parseInt(await PlayerData(PlayerId, "foods"));
@@ -438,8 +446,8 @@ module.exports = {
                                         console.error(`Failed to update ${PlayerId}`);
                                     }
                                 });
-                            let URL= "";
-                            if(age_now-1 > 6) URL = "https://i.imgur.com/1gRNebX.gif";
+                            let URL = "";
+                            if (age_now - 1 > 6) URL = "https://i.imgur.com/1gRNebX.gif";
                             else URL = "https://i.imgur.com/1O4cla2.gif";
                             const embed = new EmbedBuilder()
                                 .setTitle(`Feed: `)
