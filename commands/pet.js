@@ -133,6 +133,7 @@ module.exports = {
                 const shop = new EmbedBuilder()
                     .setTitle('這裡是商店 !\nTHE SHOP !')
                     .setColor("Random")
+                    .setImage("https://cdn-icons-png.flaticon.com/512/265/265754.png");
 
                 const storeButton = new ButtonBuilder()
                     .setStyle(ButtonStyle.Success)
