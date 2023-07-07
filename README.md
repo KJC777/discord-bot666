@@ -4,9 +4,9 @@ FOR 六角龍の隊員們
 ## env
 記得開一個.env檔喔（放在最外層（跟command同層）
 裡面要放:
-`TOKEN=[你的token]
+`TOKEN=[你的token]｀
 
-`BOTID=[你的bot的id]
+`BOTID=[你的bot的id]｀
 ## !!!!不要照抄喔!!!!
 ### token丟了的話: 去 https://discord.com/developers/applications 
 1. 點你的bot
