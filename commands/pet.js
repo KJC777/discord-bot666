@@ -335,7 +335,6 @@ module.exports = {
                         let hungry_now = parseInt(await PlayerData(PlayerId, "pet_hungry"));
                         let age_now = parseInt(await PlayerData(PlayerId, "age"));
 
-                        console.log("123");
 
                         if (hungry_now < 1) {
                             
