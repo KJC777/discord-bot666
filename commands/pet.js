@@ -366,11 +366,13 @@ module.exports = {
                             const embed = new EmbedBuilder()
                                 .setTitle(`Exercise: `)
                                 .setColor("Random")
-                                .addFields({ name: 'Age: ', value: (age_now + 1).toString(), inline: true });
+                                .addFields({ name: 'Age: ', value: (`${age_now - 1} => ${age_now}`).toString(), inline: true });
                             interaction.followUp({ embeds: [embed] });
                         }
                     }
                     else if (customId == "code") {
+
+
                         const embed = new EmbedBuilder()
                             .setTitle('還沒有東西喔...沒辦法')
                             .setColor("Random")
@@ -388,6 +390,7 @@ module.exports = {
                                 .setColor("Random")
                             interaction.followUp({ embeds: [embed] });
                         } else {
+
                             foods_now -= 1;
                             hungry_now += 1;
                             age_now += 1;
@@ -416,7 +419,7 @@ module.exports = {
                             const embed = new EmbedBuilder()
                                 .setTitle(`Feed: `)
                                 .setColor("Random")
-                                .addFields({ name: 'hungry', value: (hungry_now + 1).toString(), inline: true });
+                                .addFields({ name: 'hungry', value: `${hungry_now - 1} => ${hungry_now}`.toString(), inline: true });
                             interaction.followUp({ embeds: [embed] })
                         }
                     }
