@@ -126,7 +126,7 @@ module.exports = {
                     },
                     timestamp: new Date().toISOString(),
                     footer: {
-                        text: `+由第🦖小隊~666製作✨',
+                        text: '由第🦖小隊~666製作✨',
                     },
                 };
 
