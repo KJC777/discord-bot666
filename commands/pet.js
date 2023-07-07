@@ -18,12 +18,12 @@ module.exports = {
         const start_age = 0;
         const start_foods = 0;
         let First = false;
+        await InitDb();
         
 
         SearchPlayer(PlayerId)
             .then((Result) => {
                 if (Result.length == 0) {
-                    InitDb();
                     console.log("乖乖");
                     First = true;
                     AddPlayer(PlayerId, start_money, start_pet_hungry, start_pet_fatigue, start_age, start_foods)
@@ -32,8 +32,9 @@ module.exports = {
                                 console.error(`Failed to add ${PlayerId} to DB`);
                             }
                         });
+                } else {
+                     //..
                 }
-                let age = PlayerData(PlayerId, "age");
 
                 // const defaultEmbed = new EmbedBuilder()
                 //     .setColor("#ffffff")
@@ -92,7 +93,7 @@ module.exports = {
                 
                 const FirstEmbed = {
                     color: 0x0099ff,
-                    title: '全新寵物(把他養大以解鎖各種功能)',
+                    title: '全新寵物(把牠養大以解鎖各種功能)',
                     author: {
                         name: '來玩🦖吧！',
                         icon_url: 'https://i.imgur.com/yWdzTb2.png',
@@ -177,28 +178,21 @@ module.exports = {
                 const buttonRowOLD2 = new ActionRowBuilder().addComponents(exerciseButton, codeButton, feedButton);
 
                 //回覆
-                PlayerData(PlayerId, "age")
-                .then(age =>{
-                    let age_now = parseInt(age);
-                    if (First == true) {
-                        if (age_now < 3) {
-                            interaction.reply({ embeds: [FirstEmbed], components: [buttonRowEGG]});
-                        } else if (age_now < 6) {
-                            interaction.reply({ embeds: [FirstEmbed], components: [buttonRowYOUNG] });
-                        } else {
-                            interaction.reply({ embeds: [FirstEmbed], components: [buttonRowOLD1, buttonRowOLD2] });
-                        } 
-                    } else {
-                        if (age_now < 3) {
-                            interaction.reply({ embeds: [eggEmbed], components: [buttonRowEGG]});
-                        } else if (age_now < 6) {
-                            interaction.reply({ embeds: [youngEmbed], components: [buttonRowYOUNG] });
-                        } else {
-                            interaction.reply({ embeds: [oldEmbed], components: [buttonRowOLD1, buttonRowOLD2] });
-                        }
-                    }
-                })
-                
+                if (First == true) {
+                        interaction.reply({ embeds: [FirstEmbed], components: [buttonRowEGG]}); 
+                } else {
+                    PlayerData(PlayerId, "age")
+                    .then(age =>{
+                        let age_now = parseInt(age);
+                            if (age_now < 3) {
+                                interaction.reply({ embeds: [eggEmbed], components: [buttonRowEGG]});
+                            } else if (age_now < 6) {
+                                interaction.reply({ embeds: [youngEmbed], components: [buttonRowYOUNG] });
+                            } else {
+                                interaction.reply({ embeds: [oldEmbed], components: [buttonRowOLD1, buttonRowOLD2] });
+                            }
+                    })
+                }
                 //建立 collector
                 const collector = interaction.channel.createMessageComponentCollector({ time: 15000 });
 
@@ -279,9 +273,28 @@ module.exports = {
                             },
                         };
                         await collected.update({ embeds: [embed] });
-                        collected.followUp(`好像有甚麼事發生了!!😮...嗎?(1/3機率)(打/pet來看看吧)`);
+                        collected.followUp(`好像有甚麼事發生了!!😮...嗎?(1/3機率)`);
                         if(Math.floor(Math.random() * 3) == 1){
+                            const embed = {
+                                color: 0x0099ff,
+                                title: '挖賽，孵化!!!',
+                                author: {
+                                    name: '來玩🦖吧！',
+                                    icon_url: 'https://i.imgur.com/yWdzTb2.png',
+                                },
+                                description: '將將將將🎉',            
+                                image: {
+                                    url: 'https://i.imgur.com/F3fYNU2.gif', 
+                                },
+                                timestamp: new Date().toISOString(),
+                                footer: {
+                                    text: '由第🦖小隊~666製作✨',
+                                },
+                            };
                             UpdatePlayer(PlayerId, "age", (4).toString());
+                            collected.followUp({ embeds: [embed] });
+                        } else {
+                            collected.followUp(`QQ，無事發生...🥲`);
                         }
                     }
                     // else if (customId == "rest") {
