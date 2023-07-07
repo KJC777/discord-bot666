@@ -363,10 +363,13 @@ module.exports = {
                                         console.error(`Failed to update ${PlayerId}`);
                                     }
                                 });
-
+                            let URL = "";
+                            if(age_now -1 > 6) URL ="https://i.imgur.com/lTnqh96.gif";
+                            else URL ="https://i.imgur.com/UWNguNK.gif";
                             const embed = new EmbedBuilder()
                                 .setTitle(`Exercise: `)
                                 .setColor("Random")
+                                .setImage(URL)
                                 .addFields({ name: 'Age: ', value: (`${age_now - 1} => ${age_now}`).toString(), inline: true });
                             interaction.followUp({ embeds: [embed] });
                         }
@@ -392,6 +395,7 @@ module.exports = {
                         const embed = new EmbedBuilder()
                             .setTitle(`Code: `)
                             .setColor("Random")
+                            .setImage(`https://i.imgur.com/heuying.gif`)
                             .addFields({ name: 'hungry', value: `${hungry_now - 1} => ${hungry_now}`.toString(), inline: true });
                         interaction.followUp({ embeds: [embed] })
                     }
@@ -431,48 +435,18 @@ module.exports = {
                                         console.error(`Failed to update ${PlayerId}`);
                                     }
                                 });
-                            
+                            let URL= "";
+                            if(age_now-1 > 6) URL = "https://i.imgur.com/1gRNebX.gif";
+                            else URL = "https://i.imgur.com/1O4cla2.gif";
                             const embed = new EmbedBuilder()
                                 .setTitle(`Feed: `)
                                 .setColor("Random")
+                                .setImage(URL)
                                 .addFields({ name: 'hungry', value: `${hungry_now - 1} => ${hungry_now}`.toString(), inline: true });
                             interaction.followUp({ embeds: [embed] })
                         }
                     }
-
-                    // //讀取 players.json 並 parse 成 players
-                    // const data = fs.readFileSync("players.json");
-                    // let players = JSON.parse(data);
-                    // //在所有資料中尋找呼叫此指令玩家的資料
-                    // let found = false;
-                    // for (let i = 0; i < players.length; i++) {
-                    //     //如果有修改該玩家的 money 並回覆結果
-                    //     if (players[i].id == collected.user.id) {
-                    //         found = true;
-                    //         players[i].money += earnings;
-                    //         const resultEmbed = new EmbedBuilder()
-                    //             .setColor("#DDDDDD")
-                    //             .setTitle(`${str}`)
-                    //             .setDescription(`結果：${earnings}元\n你現在有 ${players[i].money} 元!`);
-
-                    //          collected.update({embeds: [resultEmbed], components: []});
-                    //         break;
-                    //     }
-                    // }
-                    // //如果沒有資料就創建一個新的並回覆結果
-                    // if (found == false) {
-                    //     players.push({ id: interaction.user.id, money: 500 });
-                    //     const resultEmbed = new EmbedBuilder()
-                    //     .setColor("#DDDDDD")
-                    //     .setTitle(str)
-                    //     .setDescription(`結果：${earnings}元\n你現在有 ${500+earnings} 元!`);
-                    //     collected.update({embeds: [resultEmbed], components: []});
-                    // }
-
-                    // //stringify players 並存回 players.json
-                    // const json = JSON.stringify(players);
-                    // fs.writeFileSync("players.json", json);
-                    //關閉 collector
+                    //關
                     collector.stop();
 
                 });
