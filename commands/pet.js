@@ -14,13 +14,13 @@ module.exports = {
     async execute(client, interaction) {
 
         const PlayerId = interaction.user.id;
-        const start_money = 500;
+        const start_money = 2000;
         const start_pet_hungry = 2;
         const start_pet_fatigue = 0;
         const start_age = 0;
         const start_foods = 0;
         let First = false;
-        // await InitDb();
+        await InitDb();
 
 
         SearchPlayer(PlayerId)
