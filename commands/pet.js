@@ -45,7 +45,7 @@ module.exports = {
                         name: '來玩🦖吧！',
                         icon_url: 'https://i.imgur.com/yWdzTb2.png',
                     },
-                    description: 'Some description here',            
+                    description: 'Pet menu',            
                     image: {
                         url: 'https://i.imgur.com/71ELEmK.gif', // 吃魚
                     },
@@ -61,7 +61,7 @@ module.exports = {
                         name: '來玩🦖吧！',
                         icon_url: 'https://i.imgur.com/yWdzTb2.png',
                     },
-                    description: 'Some description here',            
+                    description: 'Pet menu',            
                     image: {
                         url: 'https://i.imgur.com/NrFzY1p.gif', // 吃魚
                     },
@@ -72,12 +72,12 @@ module.exports = {
                 };
                 const oldEmbed = {
                     color: 0x0099ff,
-                    title: '成年主選單\-\-Pet menu',
+                    title: '成年主選單',
                     author: {
                         name: '來玩🦖吧！',
                         icon_url: 'https://i.imgur.com/yWdzTb2.png',
                     },
-                    description: 'Some description here',            
+                    description: 'Pet menu',            
                     image: {
                         url: 'https://i.imgur.com/0RfaFwU.gif', // 吃魚
                     },
@@ -96,7 +96,7 @@ module.exports = {
                         name: '來玩🦖吧！',
                         icon_url: 'https://i.imgur.com/yWdzTb2.png',
                     },
-                    description: 'Some description here',            
+                    description: 'Pet menu',            
                     image: {
                         url: 'https://i.imgur.com/B7FbeSb.png', // 吃魚
                     },
