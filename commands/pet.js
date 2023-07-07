@@ -40,7 +40,7 @@ module.exports = {
 
                 const eggEmbed = {
                     color: 0x0099ff,
-                    title: '蛋主選單\-\-Pet menu',
+                    title: '蛋主選單',
                     author: {
                         name: '來玩🦖吧！',
                         icon_url: 'https://i.imgur.com/yWdzTb2.png',
@@ -56,7 +56,7 @@ module.exports = {
                 };
                 const youngEmbed = {
                     color: 0x0099ff,
-                    title: '幼年主選單\-\-Pet menu',
+                    title: '幼年主選單',
                     author: {
                         name: '來玩🦖吧！',
                         icon_url: 'https://i.imgur.com/yWdzTb2.png',
