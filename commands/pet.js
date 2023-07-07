@@ -126,7 +126,7 @@ module.exports = {
                     },
                     timestamp: new Date().toISOString(),
                     footer: {
-                        text: '由第🦖小隊~666製作✨',
+                        text: `+由第🦖小隊~666製作✨',
                     },
                 };
 
@@ -234,7 +234,7 @@ module.exports = {
                             .setColor("Random")
                             .addFields(
                                 { name: 'Money', value: (await PlayerData(PlayerId, "money")).toString(), inline: true },
-                                { name: 'Hungry', value: (await PlayerData(PlayerId, "pet_hungry")).toString(), inline: true },
+                                { name: 'Energy', value: (await PlayerData(PlayerId, "pet_hungry")).toString(), inline: true },
                                 { name: 'Age', value: (await PlayerData(PlayerId, "age")).toString(), inline: true },
                                 { name: 'Foods', value: (await PlayerData(PlayerId, "foods")).toString(), inline: true });
                         interaction.followUp({ embeds: [embed] });
@@ -375,6 +375,9 @@ module.exports = {
                         }
                     }
                     else if (customId == "code") {
+                        let hungry_now = parseInt(await PlayerData(PlayerId, "pet_hungry"));
+                        let age_now = parseInt(await PlayerData(PlayerId, "age"));
+
                         hungry_now -= 1;
                         age_now += 1;
 
@@ -396,7 +399,7 @@ module.exports = {
                             .setTitle(`Code: `)
                             .setColor("Random")
                             .setImage(`https://i.imgur.com/heuying.gif`)
-                            .addFields({ name: 'hungry', value: `${hungry_now - 1} => ${hungry_now}`.toString(), inline: true });
+                            .addFields({ name: 'Energy', value: `${hungry_now - 1} => ${hungry_now}`.toString(), inline: true });
                         interaction.followUp({ embeds: [embed] })
                     }
                     else if (customId == "feed") {
