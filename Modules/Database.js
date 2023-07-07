@@ -102,6 +102,25 @@ function AddPlayer(PlayerId, money, pet_hungry, pet_fatigue, age, foods){
     })
 }
 
+function DeletePlayer(PlayerId){
+    return new Promise((resolve) => {
+        const db = OpenConnection();
+        /*
+        TODO:
+        應該還記得怎樣 INSERT 資料進去吧 🥺
+        */
+        let sql = `
+        DELETE FROM Players WHERE PlayerId = ${PlayerId};
+        `
+        db.exec(sql, (error) => {
+            if (error){
+                console.error(error);
+                return resolve(false);
+            }
+            return resolve(true);
+        })
+    })
+}
 
 function ListPlayers() {
     return new Promise((resolve) => {
@@ -179,4 +198,5 @@ module.exports = {
     SearchPlayer: SearchPlayer,
     UpdatePlayer: UpdatePlayer,
     PlayerData: PlayerData,
+    DeletePlayer: DeletePlayer,
 };

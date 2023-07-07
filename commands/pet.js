@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, Client } = require('discord.js');
 const fs = require('node:fs');
-const { AddPlayer, UpdatePlayer, SearchPlayer, InitDb, PlayerData } = require("./../Modules/Database");
+const { AddPlayer, UpdatePlayer, SearchPlayer, InitDb, PlayerData, DeletePlayer } = require("./../Modules/Database");
 
 const timer = ms => new Promise(res => setTimeout(res, ms));
 
@@ -93,12 +93,12 @@ module.exports = {
                 
                 const DeadEmbed = {
                     color: 0x0099ff,
-                    title: '死亡主選單',
+                    title: '死亡',
                     author: {
                         name: '來玩🦖吧！',
                         icon_url: 'https://i.imgur.com/yWdzTb2.png',
                     },
-                    description: '有始有終',            
+                    description: '有始有終\n再次輸入/pet 重新開始遊戲',            
                     image: {
                         url: 'https://i.imgur.com/NNtTWfqg.jpg', // 吃魚
                     },
@@ -216,6 +216,7 @@ module.exports = {
                                 interaction.reply({ embeds: [oldEmbed], components: [buttonRowOLD1, buttonRowOLD2] });
                             } else {
                                 interaction.reply({ embeds: [DeadEmbed] });
+                                DeletePlayer(PlayerId);
                             }
                     })
                 }
@@ -371,13 +372,28 @@ module.exports = {
                         }
                     }
                     else if (customId == "code") {
+                        hungry_now -= 1;
+                        age_now += 1;
 
+                        UpdatePlayer(PlayerId, "pet_hungry", hungry_now)
+                            .then((Success) => {
+                                if (!Success) {
+                                    console.error(`Failed to update ${PlayerId}`);
+                                }
+                            });
 
+                        UpdatePlayer(PlayerId, "age", age_now)
+                            .then((Success) => {
+                                if (!Success) {
+                                    console.error(`Failed to update ${PlayerId}`);
+                                }
+                            });
+                        
                         const embed = new EmbedBuilder()
-                            .setTitle('還沒有東西喔...沒辦法')
+                            .setTitle(`Code: `)
                             .setColor("Random")
-                            .addFields({ name: 'KK', value: '只是個示範', inline: true });
-                        collected.update({ embeds: [embed] });
+                            .addFields({ name: 'hungry', value: `${hungry_now - 1} => ${hungry_now}`.toString(), inline: true });
+                        interaction.followUp({ embeds: [embed] })
                     }
                     else if (customId == "feed") {
                         let foods_now = parseInt(await PlayerData(PlayerId, "foods"));
