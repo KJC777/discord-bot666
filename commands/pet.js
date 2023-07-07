@@ -34,13 +34,7 @@ module.exports = {
                                 console.error(`Failed to add ${PlayerId} to DB`);
                             }
                         });
-                } else {
-                    //..
                 }
-
-                // const defaultEmbed = new EmbedBuilder()
-                //     .setColor("#ffffff")
-                //     .setTitle(`主選單--Pet menu`)
 
                 const eggEmbed = {
                     color: 0x0099ff,
@@ -108,11 +102,7 @@ module.exports = {
                     },
                 };
 
-                // 
-
-                // .setDescription(`結果：${earnings}元\n你現在有 ${players[i].money} 元!`);
-                // interaction.reply({ embeds: [diceEmbed] });
-
+               
                 const FirstEmbed = {
                     color: 0x0099ff,
                     title: '全新寵物(把牠養大以解鎖各種功能)',
@@ -324,16 +314,8 @@ module.exports = {
                             collected.followUp(`QQ，無事發生...🥲`);
                         }
                     }
-                    // else if (customId == "rest") {
-
-                    //     const embed = new EmbedBuilder()
-                    //         .setTitle('還沒有東西喔...沒寵物')
-                    //         .setColor("Random")
-                    //         .addFields({ name: '.....', value: '只是個示範', inline: true });
-                    //     collected.update({ embeds: [embed] });
-                    // }
+                    
                     else if (customId == "exercise") {
-                        // let foods_now = parseInt(await PlayerData(PlayerId, "pet_foods"));
                         let hungry_now = parseInt(await PlayerData(PlayerId, "pet_hungry"));
                         let age_now = parseInt(await PlayerData(PlayerId, "age"));
 
