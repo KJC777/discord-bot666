@@ -73,7 +73,7 @@ function InitDb() {
                     return resolve(false);
                 }
                 console.log("DB initialized");
-                MigrateJSON();
+                // MigrateJSON();
                 return resolve(true);
             });
         });
