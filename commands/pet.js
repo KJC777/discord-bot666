@@ -18,11 +18,13 @@ module.exports = {
         const start_age = 0;
         const start_foods = 0;
         let First = false;
+        
 
         SearchPlayer(PlayerId)
             .then((Result) => {
-                let age = PlayerData(PlayerId, "age");
                 if (Result.length == 0) {
+                    InitDb();
+                    console.log("乖乖");
                     First = true;
                     AddPlayer(PlayerId, start_money, start_pet_hungry, start_pet_fatigue, start_age, start_foods)
                         .then((Success) => {
@@ -30,9 +32,8 @@ module.exports = {
                                 console.error(`Failed to add ${PlayerId} to DB`);
                             }
                         });
-                } else {
-                    //...  
                 }
+                let age = PlayerData(PlayerId, "age");
 
                 // const defaultEmbed = new EmbedBuilder()
                 //     .setColor("#ffffff")
@@ -45,7 +46,7 @@ module.exports = {
                         name: '來玩🦖吧！',
                         icon_url: 'https://i.imgur.com/yWdzTb2.png',
                     },
-                    description: 'Pet menu',            
+                    description: '它現在只是一顆蛋，但它散發著不凡的氣息，或許照照神秘光它能有一些變化',            
                     image: {
                         url: 'https://i.imgur.com/71ELEmK.gif', // 吃魚
                     },
@@ -61,7 +62,7 @@ module.exports = {
                         name: '來玩🦖吧！',
                         icon_url: 'https://i.imgur.com/yWdzTb2.png',
                     },
-                    description: 'Pet menu',            
+                    description: '跟著六角恐龍一起努力成長吧!!',            
                     image: {
                         url: 'https://i.imgur.com/NrFzY1p.gif', // 吃魚
                     },
@@ -77,7 +78,7 @@ module.exports = {
                         name: '來玩🦖吧！',
                         icon_url: 'https://i.imgur.com/yWdzTb2.png',
                     },
-                    description: 'Pet menu',            
+                    description: '超電的工程師蠑螈',            
                     image: {
                         url: 'https://i.imgur.com/0RfaFwU.gif', // 吃魚
                     },
@@ -96,7 +97,7 @@ module.exports = {
                         name: '來玩🦖吧！',
                         icon_url: 'https://i.imgur.com/yWdzTb2.png',
                     },
-                    description: 'Pet menu',            
+                    description: '開甚麼玩笑，沒有比養神秘蛋更蝦趴的事了好嗎?',            
                     image: {
                         url: 'https://i.imgur.com/B7FbeSb.png', // 吃魚
                     },
@@ -133,6 +134,7 @@ module.exports = {
                     .setLabel('🐟魚3 fish3');
 
                 const ShopRow = new ActionRowBuilder().addComponents(storeItem1, storeItem2, storeItem3);
+                
                 const statButton = new ButtonBuilder()
                     .setStyle(ButtonStyle.Success)
                     .setCustomId('status')
@@ -197,34 +199,9 @@ module.exports = {
                         }
                     }
                 })
-                // let age_now = parseInt(PlayerData(PlayerId, "age"));
-                // if (First == true) {
-                //     //
-                //     // add GIF
-                //     //
-                //     if (age_now < 3) {
-                //         interaction.reply({ embeds: [FirstEmbed], components: [buttonRowEGG]});
-                //     } else if (age_now < 6) {
-                //         interaction.reply({ embeds: [FirstEmbed], components: [buttonRowYOUNG] });
-                //     } else {
-                //         interaction.reply({ embeds: [FirstEmbed], components: [buttonRowOLD1, buttonRowOLD2] });
-                //     }
-                // } else {
-                //     if (age_now < 3) {
-                //         interaction.reply({ embeds: [eggEmbed], components: [buttonRowEGG]});
-                //     } else if (age_now < 6) {
-                //         interaction.reply({ embeds: [youngEmbed], components: [buttonRowYOUNG] });
-                //     } else {
-                //         interaction.reply({ embeds: [oldEmbed], components: [buttonRowOLD1, buttonRowOLD2] });
-                //     }
-                // }
+                
                 //建立 collector
                 const collector = interaction.channel.createMessageComponentCollector({ time: 15000 });
-
-                // console.log(collected);
-
-                // await InitDb();
-
 
                 collector.on('collect', async collected => {
 
@@ -285,14 +262,37 @@ module.exports = {
                             collector.stop();
                         });
                     }
-                    else if (customId == "rest") {
-
-                        const embed = new EmbedBuilder()
-                            .setTitle('還沒有東西喔...沒寵物')
-                            .setColor("Random")
-                            .addFields({ name: '.....', value: '只是個示範', inline: true });
-                        collected.update({ embeds: [embed] });
+                    else if (customId == "shine") {
+                        const embed = {
+                            color: 0x0099ff,
+                            title: '照光ing',
+                            author: {
+                                name: '來玩🦖吧！',
+                                icon_url: 'https://i.imgur.com/yWdzTb2.png',
+                            },
+                            description: '你正在幫你的神祕蛋照你買來的一縷聖光',            
+                            image: {
+                                url: 'https://i.imgur.com/nJkpawf.gif', 
+                            },
+                            timestamp: new Date().toISOString(),
+                            footer: {
+                                text: '由第🦖小隊~666製作✨',
+                            },
+                        };
+                        await collected.update({ embeds: [embed] });
+                        collected.followUp(`好像有甚麼事發生了!!😮...嗎?(1/3機率)(打/pet來看看吧)`);
+                        if(Math.floor(Math.random() * 3) == 1){
+                            UpdatePlayer(PlayerId, "age", (4).toString());
+                        }
                     }
+                    // else if (customId == "rest") {
+
+                    //     const embed = new EmbedBuilder()
+                    //         .setTitle('還沒有東西喔...沒寵物')
+                    //         .setColor("Random")
+                    //         .addFields({ name: '.....', value: '只是個示範', inline: true });
+                    //     collected.update({ embeds: [embed] });
+                    // }
                     else if (customId == "excercise") {
                         const embed = new EmbedBuilder()
                             .setTitle('還沒有東西喔...沒code')
