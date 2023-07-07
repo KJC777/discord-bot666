@@ -172,7 +172,7 @@ module.exports = {
                 const buttonRowEGG = new ActionRowBuilder().addComponents(statButton, storeButton, shineButton);
                 const buttonRowYOUNG = new ActionRowBuilder().addComponents(statButton, storeButton, feedButton, exerciseButton);
                 const buttonRowOLD1 = new ActionRowBuilder().addComponents(statButton, storeButton, feedButton);
-                const buttonRowOLD2 = new ActionRowBuilder().addComponents(exerciseButton, codeButton, feedButton);
+                const buttonRowOLD2 = new ActionRowBuilder().addComponents(exerciseButton, codeButton);
 
                 //回覆
                 PlayerData(PlayerId, "age")
@@ -184,7 +184,8 @@ module.exports = {
                         } else if (age_now < 6) {
                             interaction.reply({ embeds: [FirstEmbed], components: [buttonRowYOUNG] });
                         } else {
-                            interaction.reply({ embeds: [FirstEmbed], components: [buttonRowOLD1, buttonRowOLD2] });
+                            //interaction.reply({ embeds: [FirstEmbed], components: [buttonRowOLD1, buttonRowOLD2] });
+                            
                         } 
                     } else {
                         if (age_now < 3) {
