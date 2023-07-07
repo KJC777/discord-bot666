@@ -2,6 +2,8 @@ const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRow
 const fs = require('node:fs');
 const { AddPlayer, UpdatePlayer, SearchPlayer, InitDb, PlayerData } = require("./../Modules/Database");
 
+const timer = ms => new Promise(res => setTimeout(res, ms));
+
 //[建立/回覆 button] -> [建立 collector] -> [輸贏啦] -> [讀檔] -> [解析] -> [做事]  -> [回應] -> [存檔]
 
 module.exports = {
@@ -13,12 +15,12 @@ module.exports = {
 
         const PlayerId = interaction.user.id;
         const start_money = 500;
-        const start_pet_hungry = 0;
+        const start_pet_hungry = 2;
         const start_pet_fatigue = 0;
         const start_age = 0;
         const start_foods = 0;
         let First = false;
-        await InitDb();
+        // await InitDb();
         
 
         SearchPlayer(PlayerId)
@@ -88,6 +90,26 @@ module.exports = {
                         text: '由第🦖小隊~666製作✨',
                     },
                 };
+                
+                const DeadEmbed = {
+                    color: 0x0099ff,
+                    title: '死亡主選單',
+                    author: {
+                        name: '來玩🦖吧！',
+                        icon_url: 'https://i.imgur.com/yWdzTb2.png',
+                    },
+                    description: '有始有終',            
+                    image: {
+                        url: 'https://i.imgur.com/NNtTWfqg.jpg', // 吃魚
+                    },
+                    timestamp: new Date().toISOString(),
+                    footer: {
+                        text: '由第🦖小隊~666製作✨',
+                    },
+                };
+
+                // 
+
                 // .setDescription(`結果：${earnings}元\n你現在有 ${players[i].money} 元!`);
                 // interaction.reply({ embeds: [diceEmbed] });
                 
@@ -176,6 +198,7 @@ module.exports = {
                 const buttonRowYOUNG = new ActionRowBuilder().addComponents(statButton, storeButton, feedButton, exerciseButton);
                 const buttonRowOLD1 = new ActionRowBuilder().addComponents(statButton, storeButton, feedButton);
                 const buttonRowOLD2 = new ActionRowBuilder().addComponents(exerciseButton, codeButton);
+                
 
                 //回覆
                 if (First == true) {
@@ -188,8 +211,10 @@ module.exports = {
                                 interaction.reply({ embeds: [eggEmbed], components: [buttonRowEGG]});
                             } else if (age_now < 6) {
                                 interaction.reply({ embeds: [youngEmbed], components: [buttonRowYOUNG] });
-                            } else {
+                            } else if (age_now < 10) {
                                 interaction.reply({ embeds: [oldEmbed], components: [buttonRowOLD1, buttonRowOLD2] });
+                            } else {
+                                interaction.reply({ embeds: [DeadEmbed] });
                             }
                     })
                 }
@@ -305,12 +330,45 @@ module.exports = {
                     //         .addFields({ name: '.....', value: '只是個示範', inline: true });
                     //     collected.update({ embeds: [embed] });
                     // }
-                    else if (customId == "excercise") {
-                        const embed = new EmbedBuilder()
-                            .setTitle('還沒有東西喔...沒code')
-                            .setColor("Random")
-                            .addFields({ name: 'yeet', value: '只是個示範', inline: true });
-                        collected.update({ embeds: [embed] });
+                    else if (customId == "exercise") {
+                        // let foods_now = parseInt(await PlayerData(PlayerId, "pet_foods"));
+                        let hungry_now = parseInt(await PlayerData(PlayerId, "pet_hungry"));
+                        let age_now = parseInt(await PlayerData(PlayerId, "age"));
+
+                        console.log("123");
+
+                        if (hungry_now < 1) {
+                            
+                            const embed = new EmbedBuilder()
+                                .setTitle(`沒有體力了...`)
+                                .setColor("Random")
+                            interaction.followUp({ embeds: [embed] });
+                        } else {
+                            hungry_now -= 1;
+                            age_now += 1;
+
+                           
+
+                            UpdatePlayer(PlayerId, "pet_hungry", hungry_now)
+                                .then((Success) => {
+                                    if (!Success) {
+                                        console.error(`Failed to update ${PlayerId}`);
+                                    }
+                                });
+
+                            UpdatePlayer(PlayerId, "age", age_now)
+                                .then((Success) => {
+                                    if (!Success) {
+                                        console.error(`Failed to update ${PlayerId}`);
+                                    }
+                                });
+
+                            const embed = new EmbedBuilder()
+                                .setTitle(`Exercise: `)
+                                .setColor("Random")
+                                .addFields({ name: 'Age: ', value: (age_now + 1).toString(), inline: true });
+                            interaction.followUp({ embeds: [embed] });
+                        }
                     }
                     else if (customId == "code") {
                         const embed = new EmbedBuilder()
@@ -320,9 +378,9 @@ module.exports = {
                         collected.update({ embeds: [embed] });
                     }
                     else if (customId == "feed") {
-                        let foods_now = await PlayerData(PlayerId, "pet_foods");
-                        let hungry_now = await PlayerData(PlayerId, "pet_hungry");
-                        let age_now = await PlayerData(PlayerId, "age");
+                        let foods_now = parseInt(await PlayerData(PlayerId, "foods"));
+                        let hungry_now = parseInt(await PlayerData(PlayerId, "pet_hungry"));
+                        let age_now = parseInt(await PlayerData(PlayerId, "age"));
 
                         if (foods_now < 1) {
                             const embed = new EmbedBuilder()
@@ -332,7 +390,7 @@ module.exports = {
                         } else {
                             foods_now -= 1;
                             hungry_now += 1;
-                            age += 1;
+                            age_now += 1;
 
                             UpdatePlayer(PlayerId, "foods", foods_now)
                                 .then((Success) => {
@@ -354,12 +412,12 @@ module.exports = {
                                         console.error(`Failed to update ${PlayerId}`);
                                     }
                                 });
-
+                            
                             const embed = new EmbedBuilder()
                                 .setTitle(`Feed: `)
                                 .setColor("Random")
-                                .addFields({ name: 'hungry', value: (await PlayerData(PlayerId, "pet_hungry")).toString(), inline: true });
-                            interaction.followUp({ embeds: [embed] });
+                                .addFields({ name: 'hungry', value: (hungry_now + 1).toString(), inline: true });
+                            interaction.followUp({ embeds: [embed] })
                         }
                     }
 
