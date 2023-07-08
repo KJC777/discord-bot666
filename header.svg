@@ -77,13 +77,14 @@
 				}
 
 				p {
-					font-size: 20px;
+					font-size: 25px;
 					text-shadow: 0 1px 0 #efefef;
-					animation: 5s ease 0s normal forwards 1 fadeIn;
+					animation: 3s ease 0s normal forwards 1 fadeIn;
 				}
 			</style>
 			<div class="container">
-				<img src="https://i.imgur.com/71ELEmK.gif" alt="testing">
+				<h1>祝大家有個happy day<br/></h1>
+				<p>2023.07.03-2023.07.07 NTNU CAMP 第6小隊 上</p>
 			</div>
 		</div>
 	</foreignObject>
