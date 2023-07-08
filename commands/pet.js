@@ -193,19 +193,19 @@ module.exports = {
 
                 //回覆
                 if (First == true) {
-                    interaction.reply({ embeds: [FirstEmbed], components: [buttonRowEGG] });
+                    interaction.reply({ embeds: [FirstEmbed], components: [buttonRowEGG], ephemeral: true });
                 } else {
                     PlayerData(PlayerId, "age")
                         .then(age => {
                             let age_now = parseInt(age);
                             if (age_now < 3) {
-                                interaction.reply({ embeds: [eggEmbed], components: [buttonRowEGG] });
+                                interaction.reply({ embeds: [eggEmbed], components: [buttonRowEGG], ephemeral: true });
                             } else if (age_now < 6) {
-                                interaction.reply({ embeds: [youngEmbed], components: [buttonRowYOUNG] });
+                                interaction.reply({ embeds: [youngEmbed], components: [buttonRowYOUNG], ephemeral: true });
                             } else if (age_now < 10) {
-                                interaction.reply({ embeds: [oldEmbed], components: [buttonRowOLD1, buttonRowOLD2] });
+                                interaction.reply({ embeds: [oldEmbed], components: [buttonRowOLD1, buttonRowOLD2], ephemeral: true });
                             } else {
-                                interaction.reply({ embeds: [DeadEmbed] });
+                                interaction.reply({ embeds: [DeadEmbed], ephemeral: true });
                                 DeletePlayer(PlayerId);
                             }
                         })
@@ -227,7 +227,7 @@ module.exports = {
                                 { name: 'Energy', value: (await PlayerData(PlayerId, "pet_hungry")).toString(), inline: true },
                                 { name: 'Age', value: (await PlayerData(PlayerId, "age")).toString(), inline: true },
                                 { name: 'Foods', value: (await PlayerData(PlayerId, "foods")).toString(), inline: true });
-                        interaction.followUp({ embeds: [embed] });
+                        interaction.followUp({ embeds: [embed], ephemeral: true });
                     }
                     else if (customId == "store") {
                         collected.update({ embeds: [shop], components: [ShopRow] });
@@ -260,12 +260,12 @@ module.exports = {
                                             .setTitle('購買成功!')
                                             .setColor("Random")
                                             .addFields({ name: '已購買: ', value: (i + 1).toString(), inline: true },);
-                                        interaction.followUp({ embeds: [embed] });
+                                        interaction.followUp({ embeds: [embed], ephemeral: true });
                                     } else {
                                         const embed = new EmbedBuilder()
                                             .setTitle('購買失敗!')
                                             .setColor("Random");
-                                        interaction.followUp({ embeds: [embed] });
+                                        interaction.followUp({ embeds: [embed], ephemeral: true });
                                     }
                                 }
                             }
@@ -325,7 +325,7 @@ module.exports = {
                             const embed = new EmbedBuilder()
                                 .setTitle(`沒有體力了...`)
                                 .setColor("Random")
-                            interaction.followUp({ embeds: [embed] });
+                            interaction.followUp({ embeds: [embed], ephemeral: true });
                         } else {
                             hungry_now -= 1;
                             age_now += 1;
@@ -353,7 +353,7 @@ module.exports = {
                                 .setColor("Random")
                                 .setImage(URL)
                                 .addFields({ name: 'Age: ', value: (`${age_now - 1} => ${age_now}`).toString(), inline: true });
-                            interaction.followUp({ embeds: [embed] });
+                            interaction.followUp({ embeds: [embed], ephemeral: true });
                         }
                     }
                     else if (customId == "code") {
@@ -364,7 +364,7 @@ module.exports = {
                             const embed = new EmbedBuilder()
                                 .setTitle(`沒有體力了...`)
                                 .setColor("Random")
-                            interaction.followUp({ embeds: [embed] });
+                            interaction.followUp({ embeds: [embed], ephemeral: true });
                         } else {
 
                             hungry_now -= 1;
@@ -389,7 +389,7 @@ module.exports = {
                                 .setColor("Random")
                                 .setImage(`https://i.imgur.com/heuying.gif`)
                                 .addFields({ name: 'Energy', value: `${hungry_now - 1} => ${hungry_now}`.toString(), inline: true });
-                            interaction.followUp({ embeds: [embed] })
+                            interaction.followUp({ embeds: [embed], ephemeral: true })
                         }
                     }
                     else if (customId == "feed") {
@@ -401,7 +401,7 @@ module.exports = {
                             const embed = new EmbedBuilder()
                                 .setTitle(`沒有食物了...`)
                                 .setColor("Random")
-                            interaction.followUp({ embeds: [embed] });
+                            interaction.followUp({ embeds: [embed], ephemeral: true });
                         } else {
 
                             foods_now -= 1;
@@ -436,7 +436,7 @@ module.exports = {
                                 .setColor("Random")
                                 .setImage(URL)
                                 .addFields({ name: 'hungry', value: `${hungry_now - 1} => ${hungry_now}`.toString(), inline: true });
-                            interaction.followUp({ embeds: [embed] })
+                            interaction.followUp({ embeds: [embed], ephemeral: true })
                         }
                     }
                     //關
