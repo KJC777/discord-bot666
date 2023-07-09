@@ -290,7 +290,7 @@ module.exports = {
                             },
                         };
                         await collected.update({ embeds: [embed], ephemeral: true});
-                        collected.followUp(`好像有甚麼事發生了!!😮...嗎?(1/3機率)`,ephemeral = true );
+                        collected.followUp({ content: `好像有甚麼事發生了!!😮...嗎?(1/3機率)`,ephemeral: true});
                         if (Math.floor(Math.random() * 3) == 1) {
                             const embed = {
                                 color: 0x0099ff,
@@ -309,9 +309,9 @@ module.exports = {
                                 },
                             };
                             UpdatePlayer(PlayerId, "age", (4).toString());
-                            collected.followUp({ embeds: [embed] });
+                            collected.followUp({ embeds: [embed] ,ephemeral : true });
                         } else {
-                            collected.followUp(`QQ，無事發生...🥲`);
+                            collected.followUp({ content: `QQ，無事發生...🥲`,ephemeral: true});
                         }
                     }
                     
