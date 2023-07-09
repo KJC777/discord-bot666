@@ -289,8 +289,8 @@ module.exports = {
                                 text: '由第🦖小隊~666製作✨',
                             },
                         };
-                        await collected.update({ embeds: [embed] });
-                        collected.followUp(`好像有甚麼事發生了!!😮...嗎?(1/3機率)`);
+                        await collected.update({ embeds: [embed], ephemeral: true});
+                        collected.followUp(`好像有甚麼事發生了!!😮...嗎?(1/3機率)`,ephemeral = true };
                         if (Math.floor(Math.random() * 3) == 1) {
                             const embed = {
                                 color: 0x0099ff,
